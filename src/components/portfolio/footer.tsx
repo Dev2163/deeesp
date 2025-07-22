@@ -26,7 +26,7 @@ export function Footer() {
             </span>
           </div>
           <p className="text-sm text-muted-foreground">
-            © 2024 Dev Suthar. All rights reserved. | Fresher Developer & Content Creator
+            © 2025 Dev Suthar. All rights reserved. | Fresher Developer & Content Creator
           </p>
         </motion.div>
       </div>

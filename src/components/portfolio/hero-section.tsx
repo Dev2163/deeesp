@@ -156,7 +156,7 @@ export function HeroSection() {
             <div className="flex justify-center sm:justify-start gap-6 pt-4">
               {/* GitHub */}
               <a
-                href="https://github.com/dee184-coder"
+                href="https://github.com/Dev2163"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative w-12 h-12 rounded-full flex items-center justify-center 

@@ -53,10 +53,10 @@ export function VideoSection() {
               <video src={codingVideo} controls className="w-full h-full object-cover"></video>
             </div>
             <h3 className="text-xl font-semibold mb-2 text-foreground">
-              Coding Process Video
+              Behind the Scenes: Coding Journey in Photos
             </h3>
             <p className="text-muted-foreground">
-              A look into the development process and problem-solving techniques.
+              A visual snapshot of the development process — captured through a series of images.
             </p>
           </Card>
         </motion.div>

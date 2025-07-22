@@ -5,7 +5,7 @@ import { GraduationCap, Code, Youtube, Award } from "lucide-react"
 
 export function AboutSection() {
   const technologies = [
-    "Kotlin", "Dart", "Flutter", "JavaScript", "Python", "HTML", "CSS", 
+    "c", "HTML", "CSS", "JavaScript", "Kotlin", "SQLite", "Dart", "Flutter", "Python", "Django", 
     "React", "Node.js", "MongoDB", "Firebase", "PostgreSQL"
   ]
 
