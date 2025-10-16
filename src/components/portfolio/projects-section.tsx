@@ -17,7 +17,7 @@ export function ProjectsSection() {
       technologies: ["React", "Node.js", "MongoDB"],
       category: "Web",
       liveDemo: "#",
-      sourceCode: "#"
+      sourceCode: "https://github.com/Dev2163/whowear"
     },
     {
       title: "DS Car Show",
@@ -26,7 +26,7 @@ export function ProjectsSection() {
       technologies: ["Django", "SQLite", "Bootstrap"],
       category: "Web",
       liveDemo: "#",
-      sourceCode: "#"
+      sourceCode: "https://github.com/Dev2163/car_shows"
     },
     {
       title: "Finance Tracker App",
@@ -44,7 +44,7 @@ export function ProjectsSection() {
       technologies: ["Kotlin", "Firebase"],
       category: "Mobile",
       liveDemo: "#",
-      sourceCode: "#"
+      sourceCode: "https://github.com/Dev2163/ev-charging-station-app"
     },
     {
       title: "Grocery Purchase App",
@@ -62,7 +62,7 @@ export function ProjectsSection() {
       technologies: ["Flutter", "SQLite"],
       category: "Mobile",
       liveDemo: "#",
-      sourceCode: "#"
+      sourceCode: "https://github.com/Dev2163/sundarkand_booking"
     }
   ]
 
@@ -183,17 +183,6 @@ export function ProjectsSection() {
 
                     {/* Action Buttons */}
                     <div className="flex gap-3">
-                      <Button
-                        variant="default"
-                        size="sm"
-                        className="flex-1"
-                        asChild
-                      >
-                        <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Demo
-                        </a>
-                      </Button>
                       <Button
                         variant="outline"
                         size="sm"
