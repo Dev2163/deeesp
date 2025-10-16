@@ -25,11 +25,9 @@ export function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-background/80 backdrop-blur-lg border-b border-border shadow-elegant" 
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 
+        bg-white/90 dark:bg-neutral-900/80 backdrop-blur-md border-b border-border 
+        ${isScrolled ? 'shadow-elegant' : 'shadow-sm'}`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}

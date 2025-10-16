@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { GraduationCap, Code, Youtube, Award } from "lucide-react"
+import { GraduationCap, Code, Award } from "lucide-react"
 
 export function AboutSection() {
   const technologies = [
@@ -193,49 +193,7 @@ export function AboutSection() {
           </div>
         </motion.div>
 
-        {/* Beyond Code */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-16">
-
-          
-          <a href="https://www.youtube.com/@DSautos03"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Card
-              className={`
-                p-8 text-primary-foreground border-0
-                bg-cover bg-center rounded-2xl overflow-hidden
-                shadow-md transition-all duration-500 ease-in-out
-                hover:scale-105 hover:shadow-2xl hover:brightness-110
-                dark:shadow-black/50 shadow-gray-400
-              `}
-              style={{
-                backgroundImage: "url('/images/background.png')"
-              }}
-            >
-              <CardContent
-                className="
-                  p-0 text-center
-                  backdrop-brightness-75 dark:backdrop-brightness-50
-                  bg-black/40 dark:bg-black/60
-                  rounded-xl transition-all duration-500
-                "
-              >
-                <Youtube className="w-12 h-12 mx-auto mb-4 opacity-90" />
-                <h3 className="text-2xl font-bold mb-4">Beyond Code</h3>
-                <p className="text-lg opacity-90 max-w-2xl mx-auto">
-                  As a YouTuber and video editor, I bring a strong visual sense to UI/UX design, blending creativity with technical solutions to create engaging user experiences.
-                </p>
-              </CardContent>
-            </Card>
-          </a>
-
-        </motion.div>
+        
       </div>
     </section>
   )

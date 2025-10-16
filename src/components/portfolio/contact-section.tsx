@@ -1,9 +1,6 @@
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send, Heart } from "lucide-react"
+import { Mail, Phone, MapPin, Heart } from "lucide-react"
 
 export function ContactSection() {
   const contactInfo = [
@@ -47,14 +44,14 @@ export function ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-8 text-center"
           >
             <div>
               <h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
@@ -69,8 +66,8 @@ export function ContactSection() {
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={info.label}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
@@ -78,7 +75,7 @@ export function ContactSection() {
                     <CardContent className="p-0">
                       <a 
                         href={info.href}
-                        className="flex items-center space-x-4 group-hover:text-primary transition-colors duration-300"
+                        className="flex items-center justify-center gap-4 group-hover:text-primary transition-colors duration-300"
                       >
                         <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
                           <info.icon className="w-6 h-6 text-primary" />
@@ -95,7 +92,6 @@ export function ContactSection() {
                 </motion.div>
               ))}
             </div>
-
             {/* Social Links or Additional Info */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -113,80 +109,6 @@ export function ContactSection() {
                 </CardContent>
               </Card>
             </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Card className="p-8 bg-card-gradient shadow-elegant border-0">
-              <CardContent className="p-0">
-                <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
-                        Your Name
-                      </label>
-                      <Input
-                        id="name"
-                        placeholder="Dev Suthar"
-                        className="w-full"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
-                        Email Address
-                      </label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="devsp124@gmail.com"
-                        className="w-full"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                      Subject
-                    </label>
-                    <Input
-                      id="subject"
-                      placeholder="Project Name"
-                      className="w-full"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      placeholder="Hi Dev, I'd like to discuss..."
-                      className="w-full h-32 resize-none"
-                    />
-                  </div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Button 
-                      type="submit" 
-                      className="w-full text-lg py-6 shadow-elegant hover:shadow-glow transition-all duration-300"
-                    >
-                      <Send className="w-5 h-5 mr-2" />
-                      Send Message
-                    </Button>
-                  </motion.div>
-                </form>
-              </CardContent>
-            </Card>
           </motion.div>
         </div>
 

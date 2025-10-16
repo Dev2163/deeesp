@@ -20,7 +20,7 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-hero-gradient">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-hero-gradient scroll-mt-20">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-float" />
@@ -29,10 +29,10 @@ export function HeroSection() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 gap-12 items-center justify-items-center">
           {/* Left side - Text content */}
           <motion.div 
-            className="text-center lg:text-left space-y-6"
+            className="text-center space-y-6"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -89,7 +89,7 @@ export function HeroSection() {
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 pt-6"
+              className="flex flex-col sm:flex-row gap-4 pt-6 justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
@@ -153,7 +153,7 @@ export function HeroSection() {
             </motion.div>
             
             {/* 👇 Add this just below the button block 👇 */}
-            <div className="flex justify-center sm:justify-start gap-6 pt-4">
+            <div className="flex justify-center gap-6 pt-4">
               {/* GitHub */}
               <a
                 href="https://github.com/Dev2163"
@@ -183,68 +183,9 @@ export function HeroSection() {
                 <Linkedin className="w-5 h-5 z-10" />
               </a>
             
-              {/* Instagram */}
-              <a
-                href="https://www.instagram.com/dev_s_21_/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative w-12 h-12 rounded-full flex items-center justify-center 
-                           bg-white dark:bg-gray-900 shadow-md 
-                           border-2 border-blue-500 text-blue-500 
-                           transition-all duration-300 hover:scale-105 group overflow-hidden"
-              >
-                <div className="absolute inset-1 rounded-full border-2 border-blue-400 opacity-30 group-hover:animate-pulse" />
-                <Instagram className="w-5 h-5 z-10" />
-              </a>
-              {/* youtube */}
-              <a
-                href="https://www.youtube.com/@DSautos03"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative w-12 h-12 rounded-full flex items-center justify-center 
-                           bg-white dark:bg-gray-900 shadow-md 
-                           border-2 border-blue-500 text-blue-500 
-                           transition-all duration-300 hover:scale-105 group overflow-hidden"
-              >
-                <div className="absolute inset-1 rounded-full border-2 border-blue-400 opacity-30 group-hover:animate-pulse" />
-                <Youtube className="w-5 h-5 z-10" />
-              </a>
             </div>
           </motion.div>
 
-          {/* Right side - Profile image/video */}
-          <motion.div
-            className="flex justify-center lg:justify-end"
-            initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-          >
-            <div className="relative">
-              {/* Profile image container */}
-              <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full bg-card-gradient shadow-elegant overflow-hidden border-4 border-primary/20">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <img src={profileImg} alt="Dev Suthar" className="w-full h-full object-cover" />
-                </div>
-              </div>
-              
-              {/* Floating elements */}
-              <motion.div
-                className="absolute -top-4 -right-4 w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <span className="text-2xl">💡</span>
-              </motion.div>
-              
-              <motion.div
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center backdrop-blur-sm"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity }}
-              >
-                <span className="text-2xl">🚀</span>
-              </motion.div>
-            </div>
-          </motion.div>
         </div>
       </div>
 
