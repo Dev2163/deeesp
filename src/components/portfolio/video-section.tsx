@@ -38,7 +38,14 @@ export function VideoSection() {
         >
           <Card className="p-6 bg-card-gradient border-primary/20 hover:border-primary/40 transition-all duration-300 group">
             <div className="aspect-video rounded-lg mb-4 overflow-hidden">
-              <video src={promoVideo} controls className="w-full h-full object-cover"></video>
+              <video
+                src={promoVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </div>
             <h3 className="text-xl font-semibold mb-2 text-foreground">
               WhoWear Custom T-Shirt Promo
@@ -50,7 +57,14 @@ export function VideoSection() {
 
           <Card className="p-6 bg-card-gradient border-primary/20 hover:border-primary/40 transition-all duration-300 group">
             <div className="aspect-video rounded-lg mb-4 overflow-hidden">
-              <video src={codingVideo} controls className="w-full h-full object-cover"></video>
+              <video
+                src={codingVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </div>
             <h3 className="text-xl font-semibold mb-2 text-foreground">
               Behind the Scenes: Coding Journey in Photos
