@@ -49,7 +49,7 @@ export function ProjectsSection() {
     {
       title: "Grocery Purchase App",
       description: "A grocery app with cart, bill generation, and PDF export, for both Android & web.",
-      image: "🛒",
+      image: "/images/grocery.jpg",
       technologies: ["Flutter", "SQLite"],
       category: "Mobile",
       liveDemo: "#",
@@ -58,7 +58,7 @@ export function ProjectsSection() {
     {
       title: "Sundarkand Booking App",
       description: "Simple Gujarati/English interface to book Sundarkand, view bookings, export Excel, and send WhatsApp reminders easily. all in one app!",
-      image: "🛒",
+      image: "/images/sundarkand.jpg",
       technologies: ["Flutter", "SQLite"],
       category: "Mobile",
       liveDemo: "#",
@@ -68,8 +68,8 @@ export function ProjectsSection() {
 
   const categories = ["All", "Web", "Mobile"]
 
-  const filteredProjects = filter === "All" 
-    ? projects 
+  const filteredProjects = filter === "All"
+    ? projects
     : projects.filter(project => project.category === filter)
 
   return (
@@ -124,12 +124,12 @@ export function ProjectsSection() {
                 <CardContent className="p-0">
                   {/* Project Image */}
                   <div className="h-48 bg-hero-gradient flex items-center justify-center group-hover:scale-105 transition-transform duration-300 overflow-hidden">
-                  {project.image.startsWith("/images/") ? (
+                    {project.image.startsWith("/images/") ? (
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover"/>) : (
-                        <div className="text-6xl">{project.image}</div>)}
+                        className="w-full h-full object-cover" />) : (
+                      <div className="text-6xl">{project.image}</div>)}
                   </div>
 
                   <div className="p-6">
@@ -221,7 +221,7 @@ export function ProjectsSection() {
                   Let's Collaborate
                 </Button>
               </a>
-            
+
             </CardContent>
           </Card>
         </motion.div>

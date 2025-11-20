@@ -8,7 +8,7 @@ import { Github, Linkedin, Instagram } from "lucide-react"
 
 
 export function HeroSection() {
-  const roles = [ "Android & IOS Developer", "Web Developer", "Software Developer", "Video Editor"]
+  const roles = ["Android & IOS Developer", "Web Developer", "Software Developer", "Video Editor"]
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0)
   const [showContacts, setShowContacts] = useState(false);
 
@@ -31,7 +31,7 @@ export function HeroSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 gap-12 items-center justify-items-center">
           {/* Left side - Text content */}
-          <motion.div 
+          <motion.div
             className="text-center space-y-6"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ export function HeroSection() {
               transition={{ delay: 0.6, duration: 0.6 }}
             >
               <span>I'm a </span>
-              <motion.span 
+              <motion.span
                 className="font-semibold text-black dark:text-white"
                 key={currentRoleIndex}
                 initial={{ opacity: 0, y: 20 }}
@@ -94,53 +94,53 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
             >
-                            <div className="relative">
+              <div className="relative">
                 <Button size="lg" className="text-lg px-8 py-6 shadow-elegant hover:shadow-glow transition-all duration-300" onClick={() => setShowContacts(!showContacts)}>
                   <Mail className="w-5 h-5 mr-2" />
                   Get in Touch
                 </Button>
                 {showContacts && (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
-    animate={{ opacity: 1, scale: 1, rotate: 0 }}
-    exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
-    className="absolute -top-2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4"
-    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-  >
-    <motion.a
-      href="#contact"
-      className="w-12 h-12 rounded-full flex items-center justify-center bg-card shadow-md"
-      initial={{ y: 50, opacity: 0, rotate: -90 }}
-      animate={{ y: -60, opacity: 1, rotate: 0 }}
-      exit={{ y: 50, opacity: 0, rotate: 90 }}
-      transition={{ duration: 0.6, ease: "backOut" }}
-    >
-      <Mail className="w-6 h-6" />
-    </motion.a>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
+                    className="absolute -top-2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4"
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  >
+                    <motion.a
+                      href="#contact"
+                      className="w-12 h-12 rounded-full flex items-center justify-center bg-card shadow-md"
+                      initial={{ y: 50, opacity: 0, rotate: -90 }}
+                      animate={{ y: -60, opacity: 1, rotate: 0 }}
+                      exit={{ y: 50, opacity: 0, rotate: 90 }}
+                      transition={{ duration: 0.6, ease: "backOut" }}
+                    >
+                      <Mail className="w-6 h-6" />
+                    </motion.a>
 
-    <motion.a
-      href="#contact"
-      className="w-12 h-12 rounded-full flex items-center justify-center bg-card shadow-md"
-      initial={{ y: 50, opacity: 0, rotate: -90 }}
-      animate={{ y: -70, opacity: 1, rotate: 0 }}
-      exit={{ y: 50, opacity: 0, rotate: 90 }}
-      transition={{ duration: 0.7, ease: "backOut", delay: 0.1 }}
-    >
-      <Phone className="w-6 h-6" />
-    </motion.a>
+                    <motion.a
+                      href="#contact"
+                      className="w-12 h-12 rounded-full flex items-center justify-center bg-card shadow-md"
+                      initial={{ y: 50, opacity: 0, rotate: -90 }}
+                      animate={{ y: -70, opacity: 1, rotate: 0 }}
+                      exit={{ y: 50, opacity: 0, rotate: 90 }}
+                      transition={{ duration: 0.7, ease: "backOut", delay: 0.1 }}
+                    >
+                      <Phone className="w-6 h-6" />
+                    </motion.a>
 
-    <motion.a
-      href="#contact"
-      className="w-12 h-12 rounded-full flex items-center justify-center bg-card shadow-md"
-      initial={{ y: 50, opacity: 0, rotate: -90 }}
-      animate={{ y: -60, opacity: 1, rotate: 0 }}
-      exit={{ y: 50, opacity: 0, rotate: 90 }}
-      transition={{ duration: 0.8, ease: "backOut", delay: 0.2 }}
-    >
-      <Github className="w-6 h-6" />
-    </motion.a>
-  </motion.div>
-)}
+                    <motion.a
+                      href="#contact"
+                      className="w-12 h-12 rounded-full flex items-center justify-center bg-card shadow-md"
+                      initial={{ y: 50, opacity: 0, rotate: -90 }}
+                      animate={{ y: -60, opacity: 1, rotate: 0 }}
+                      exit={{ y: 50, opacity: 0, rotate: 90 }}
+                      transition={{ duration: 0.8, ease: "backOut", delay: 0.2 }}
+                    >
+                      <Github className="w-6 h-6" />
+                    </motion.a>
+                  </motion.div>
+                )}
 
 
               </div>
@@ -151,7 +151,7 @@ export function HeroSection() {
                 </Button>
               </a>
             </motion.div>
-            
+
             {/* 👇 Add this just below the button block 👇 */}
             <div className="flex justify-center gap-6 pt-4">
               {/* GitHub */}
@@ -168,10 +168,10 @@ export function HeroSection() {
                 <div className="absolute inset-1 rounded-full border-2 border-blue-400 opacity-30 group-hover:animate-pulse" />
                 <Github className="w-5 h-5 z-10" />
               </a>
-            
+
               {/* LinkedIn */}
               <a
-                href="https://www.linkedin.com/in/dev-suthar-648986312/"
+                href="https://www.linkedin.com/in/devsuthar21"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative w-12 h-12 rounded-full flex items-center justify-center 
@@ -182,7 +182,7 @@ export function HeroSection() {
                 <div className="absolute inset-1 rounded-full border-2 border-blue-400 opacity-30 group-hover:animate-pulse" />
                 <Linkedin className="w-5 h-5 z-10" />
               </a>
-            
+
             </div>
           </motion.div>
 
