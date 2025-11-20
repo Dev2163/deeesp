@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Moon, Sun } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { theme, setTheme } = useTheme();
 
     useEffect(() => {
@@ -33,8 +34,8 @@ export function Header() {
     return (
         <motion.header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "bg-background/80 backdrop-blur-lg shadow-md"
-                    : "bg-transparent"
+                ? "bg-background/80 backdrop-blur-lg shadow-md"
+                : "bg-transparent"
                 }`}
             initial={{ y: -100 }}
             animate={{ y: 0 }}
@@ -109,30 +110,49 @@ export function Header() {
                                 <Moon className="w-5 h-5 text-foreground" />
                             )}
                         </motion.button>
+
+                        <motion.button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="w-10 h-10 rounded-full bg-foreground/10 hover:bg-foreground/20 flex items-center justify-center transition-colors"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                        >
+                            {isMobileMenuOpen ? (
+                                <X className="w-5 h-5 text-foreground" />
+                            ) : (
+                                <Menu className="w-5 h-5 text-foreground" />
+                            )}
+                        </motion.button>
                     </div>
                 </div>
 
                 {/* Mobile Navigation */}
-                <motion.nav
-                    className="md:hidden mt-4 flex flex-col gap-4"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    transition={{ duration: 0.3 }}
-                >
-                    {navItems.map((item) => (
-                        <a
-                            key={item.name}
-                            href={item.href}
-                            className="text-foreground hover:text-primary transition-colors font-medium"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                scrollToSection(item.href);
-                            }}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <motion.nav
+                            className="md:hidden mt-4 flex flex-col gap-4 pb-4"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
                         >
-                            {item.name}
-                        </a>
-                    ))}
-                </motion.nav>
+                            {navItems.map((item) => (
+                                <a
+                                    key={item.name}
+                                    href={item.href}
+                                    className="text-foreground hover:text-primary transition-colors font-medium"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        scrollToSection(item.href);
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                >
+                                    {item.name}
+                                </a>
+                            ))}
+                        </motion.nav>
+                    )}
+                </AnimatePresence>
             </div>
         </motion.header>
     );
