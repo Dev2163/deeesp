@@ -58,7 +58,7 @@ export function ProjectsSection() {
     {
       title: "Sundarkand Booking App",
       description: "Simple Gujarati/English interface to book Sundarkand, view bookings, export Excel, and send WhatsApp reminders easily. all in one app!",
-      image: "/images/sundarkand.jpg",
+      image: "/images/sunderkand.jpg",
       technologies: ["Flutter", "SQLite"],
       category: "Mobile",
       liveDemo: "#",
