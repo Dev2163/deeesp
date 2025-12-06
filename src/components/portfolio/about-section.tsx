@@ -5,8 +5,21 @@ import { GraduationCap, Code, Award } from "lucide-react"
 
 export function AboutSection() {
   const technologies = [
-    "c", "HTML", "CSS", "JavaScript", "Kotlin", "SQLite", "Dart", "Flutter", "Python", "Django", 
-    "React", "Node.js", "MongoDB", "Firebase", "PostgreSQL"
+    { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
+    { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "Kotlin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+    { name: "SQLite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
+    { name: "Dart", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" },
+    { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
+    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" },
+    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+    { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+    { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" }
   ]
 
   const education = [
@@ -18,7 +31,7 @@ export function AboutSection() {
     },
     {
       degree: "Bachelor of Science in IT (B.Sc. IT)",
-      period: "2021 – 2024", 
+      period: "2021 – 2024",
       cgpa: "7.43",
       description: "Gained a solid foundation in programming, databases, and web tech."
     }
@@ -106,7 +119,7 @@ export function AboutSection() {
               <GraduationCap className="w-6 h-6 mr-3 text-primary" />
               My Journey
             </h3>
-            
+
             {education.map((edu, index) => (
               <motion.div
                 key={index}
@@ -138,27 +151,41 @@ export function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-16 overflow-hidden"
         >
           <h3 className="text-2xl font-bold mb-8 text-center flex items-center justify-center">
             <Code className="w-6 h-6 mr-3 text-primary" />
             Technologies I Use
           </h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {technologies.map((tech, index) => (
-              <motion.div
-                key={tech}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.1 }}
-              >
-                <Badge variant="outline" className="px-4 py-2 text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-200">
-                  {tech}
-                </Badge>
-              </motion.div>
-            ))}
+
+          {/* Infinite Scrolling Container */}
+          <div className="relative">
+            <div className="flex animate-scroll">
+              {/* First set of technologies */}
+              {technologies.map((tech, index) => (
+                <div
+                  key={`tech-1-${index}`}
+                  className="flex-shrink-0 mx-4"
+                >
+                  <Badge variant="outline" className="px-6 py-4 text-base font-medium whitespace-nowrap flex items-center gap-3">
+                    <img src={tech.icon} alt={tech.name} className="w-8 h-8" />
+                    {tech.name}
+                  </Badge>
+                </div>
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {technologies.map((tech, index) => (
+                <div
+                  key={`tech-2-${index}`}
+                  className="flex-shrink-0 mx-4"
+                >
+                  <Badge variant="outline" className="px-6 py-4 text-base font-medium whitespace-nowrap flex items-center gap-3">
+                    <img src={tech.icon} alt={tech.name} className="w-8 h-8" />
+                    {tech.name}
+                  </Badge>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -193,7 +220,7 @@ export function AboutSection() {
           </div>
         </motion.div>
 
-        
+
       </div>
     </section>
   )

@@ -42,12 +42,12 @@ All colors MUST be HSL.
     --gradient-start: 264 100% 50%;
     --gradient-mid: 220 91% 55%;
     --gradient-end: 187 85% 60%;
-    
+
     /* Additional semantic colors */
     --hero-gradient: linear-gradient(135deg, hsl(264 100% 50%), hsl(250 91% 55%), hsl(213 94% 50%));
     --card-gradient: linear-gradient(145deg, hsl(0 0% 100%), hsl(0 0% 98%));
     --text-gradient: linear-gradient(135deg, hsl(264 100% 50%), hsl(187 85% 40%));
-    
+
     /* Shadows and effects */
     --shadow-elegant: 0 20px 60px -10px hsl(264 100% 35% / 0.2);
     --shadow-glow: 0 0 40px hsl(264 100% 35% / 0.3);
@@ -103,7 +103,7 @@ All colors MUST be HSL.
     --hero-gradient: linear-gradient(135deg, hsl(264 100% 60%), hsl(250 91% 65%), hsl(213 94% 55%));
     --card-gradient: linear-gradient(145deg, hsl(0 0% 10%), hsl(0 0% 15%));
     --text-gradient: linear-gradient(135deg, hsl(264 100% 70%), hsl(187 85% 60%));
-    
+
     /* Dark mode shadows */
     --shadow-elegant: 0 20px 60px -10px hsl(264 100% 60% / 0.3);
     --shadow-glow: 0 0 50px hsl(264 100% 60% / 0.4);
@@ -129,7 +129,8 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    cursor: none; /* Hide default cursor for custom cursor */
+    cursor: none;
+    /* Hide default cursor for custom cursor */
   }
 
   /* Show default cursor on mobile/touch devices */
@@ -141,20 +142,27 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+
   /* Custom animations */
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0px);
     }
+
     50% {
       transform: translateY(-20px);
     }
   }
 
   @keyframes bounce-slow {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0) scale(1);
     }
+
     50% {
       transform: translateY(-10px) scale(1.05);
     }
@@ -165,6 +173,7 @@ All colors MUST be HSL.
       opacity: 0;
       transform: translateY(30px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -176,9 +185,20 @@ All colors MUST be HSL.
       opacity: 0;
       transform: translateX(-30px);
     }
+
     to {
       opacity: 1;
       transform: translateX(0);
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
     }
   }
 
@@ -196,6 +216,10 @@ All colors MUST be HSL.
 
   .animate-slide-in-right {
     animation: slide-in-right 0.6s ease-out;
+  }
+
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
   }
 
   /* Gradient text */
