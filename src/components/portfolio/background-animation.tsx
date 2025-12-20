@@ -12,15 +12,10 @@ interface Particle {
 
 export function BackgroundAnimation() {
     const [particles, setParticles] = useState<Particle[]>([])
-    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
         // Check if device is mobile
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window)
-        }
-        checkMobile()
-        window.addEventListener('resize', checkMobile)
+        const isMobile = window.innerWidth < 768 || 'ontouchstart' in window
 
         // Generate random particles (fewer on mobile)
         const particleCount = isMobile ? 20 : 80
@@ -34,8 +29,26 @@ export function BackgroundAnimation() {
         }))
         setParticles(newParticles)
 
-        return () => window.removeEventListener('resize', checkMobile)
-    }, [isMobile])
+        // Handle resize
+        const handleResize = () => {
+            const isMobileNow = window.innerWidth < 768
+            const currentCount = isMobileNow ? 20 : 80
+            if (particles.length !== currentCount) {
+                const resizedParticles: Particle[] = Array.from({ length: currentCount }, (_, i) => ({
+                    id: i,
+                    x: Math.random() * 100,
+                    y: Math.random() * 100,
+                    size: Math.random() * 4 + 1,
+                    duration: Math.random() * 20 + 15,
+                    delay: Math.random() * 5,
+                }))
+                setParticles(resizedParticles)
+            }
+        }
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     return (
         <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">

@@ -51,8 +51,11 @@ export function HeroSection() {
     return () => clearTimeout(timeout)
   }, [displayText, isDeleting, currentRole])
 
-  // Magnetic mouse effect
+  // Magnetic mouse effect (disabled on mobile)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Skip on mobile/touch devices
+    if ('ontouchstart' in window || window.innerWidth < 768) return
+
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
