@@ -1,9 +1,10 @@
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useState, useEffect } from "react"
 
 export function Header() {
     const [activeSection, setActiveSection] = useState("home")
     const [isScrolled, setIsScrolled] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const { scrollY } = useScroll()
     const headerOpacity = useTransform(scrollY, [0, 100], [0.8, 1])
     const headerBlur = useTransform(scrollY, [0, 100], [0, 20])
@@ -49,6 +50,7 @@ export function Header() {
                 behavior: "smooth"
             })
         }
+        setMobileMenuOpen(false) // Close menu after clicking
     }
 
     return (
@@ -112,11 +114,16 @@ export function Header() {
 
                         {/* Mobile Menu Button */}
                         <motion.button
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="md:hidden p-2 rounded-full glass hover:bg-white/10"
                             whileTap={{ scale: 0.9 }}
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M3 12h18M3 6h18M3 18h18" />
+                                {mobileMenuOpen ? (
+                                    <path d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path d="M3 12h18M3 6h18M3 18h18" />
+                                )}
                             </svg>
                         </motion.button>
                     </nav>
@@ -124,38 +131,44 @@ export function Header() {
             </div>
 
             {/* Mobile Navigation */}
-            <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="md:hidden mt-4 mx-4"
-            >
-                <div className="rounded-2xl glass-strong p-4 grid grid-cols-2 gap-2">
-                    {navItems.map((item) => (
-                        <motion.button
-                            key={item.id}
-                            onClick={() => scrollToSection(item.id)}
-                            className={`relative px-4 py-3 rounded-xl font-medium transition-all ${activeSection === item.id
-                                ? 'text-white'
-                                : 'hover:bg-white/10'
-                                }`}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <span className="flex items-center justify-center gap-2">
-                                <span className="text-xl">{item.icon}</span>
-                                {item.label}
-                            </span>
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.2 }}
+                        className="md:hidden mt-4 mx-4"
+                    >
+                        <div className="rounded-2xl glass-strong p-4 grid grid-cols-2 gap-2">
+                            {navItems.map((item) => (
+                                <motion.button
+                                    key={item.id}
+                                    onClick={() => scrollToSection(item.id)}
+                                    className={`relative px-4 py-3 rounded-xl font-medium transition-all ${activeSection === item.id
+                                        ? 'text-white'
+                                        : 'hover:bg-white/10'
+                                        }`}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <span className="flex items-center justify-center gap-2">
+                                        <span className="text-xl">{item.icon}</span>
+                                        {item.label}
+                                    </span>
 
-                            {activeSection === item.id && (
-                                <motion.div
-                                    layoutId="activeMobileNav"
-                                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-neural-600 to-quantum-600 -z-10"
-                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                />
-                            )}
-                        </motion.button>
-                    ))}
-                </div>
-            </motion.div>
+                                    {activeSection === item.id && (
+                                        <motion.div
+                                            layoutId="activeMobileNav"
+                                            className="absolute inset-0 rounded-xl bg-gradient-to-r from-neural-600 to-quantum-600 -z-10"
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        />
+                                    )}
+                                </motion.button>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.header>
     )
 }
