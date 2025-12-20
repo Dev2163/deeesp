@@ -11,6 +11,7 @@ export function CustomCursor() {
     const [isHovering, setIsHovering] = useState(false)
     const [clickEffects, setClickEffects] = useState<ClickEffect[]>([])
     const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([])
+    const [isMobile, setIsMobile] = useState(false)
 
     const cursorX = useMotionValue(-100)
     const cursorY = useMotionValue(-100)
@@ -18,6 +19,19 @@ export function CustomCursor() {
     const springConfig = { damping: 25, stiffness: 700 }
     const cursorXSpring = useSpring(cursorX, springConfig)
     const cursorYSpring = useSpring(cursorY, springConfig)
+
+    useEffect(() => {
+        // Check if device is mobile/touch
+        const checkMobile = () => {
+            setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0)
+        }
+        checkMobile()
+    }, [])
+
+    // Don't render custom cursor on mobile
+    if (isMobile) {
+        return null
+    }
 
     useEffect(() => {
         const moveCursor = (e: MouseEvent) => {
