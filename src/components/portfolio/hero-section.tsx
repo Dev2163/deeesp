@@ -230,7 +230,7 @@ export function HeroSection() {
             className="mb-6"
           >
             <motion.h1
-              className="font-display text-7xl md:text-9xl mb-4"
+              className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-9xl mb-4"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -268,14 +268,14 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="mb-8 h-16 flex items-center justify-center"
+            className="mb-8 h-12 sm:h-14 md:h-16 flex items-center justify-center px-4"
           >
-            <span className="text-2xl md:text-4xl font-medium text-muted-foreground">
+            <span className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-medium text-muted-foreground text-center">
               {displayText}
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-1 h-8 md:h-10 bg-neural-500 ml-1"
+                className="inline-block w-0.5 sm:w-1 h-6 sm:h-8 md:h-10 bg-neural-500 ml-1"
               />
             </span>
           </motion.div>
@@ -285,7 +285,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed px-4"
           >
             A passionate developer and content creator from Gujarat, India.
             Specialized in Android & Flutter development with a creative eye for
@@ -297,11 +297,11 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-wrap gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4"
           >
             <motion.a
               href="#contact"
-              className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-neural-600 to-quantum-600 text-white font-semibold overflow-hidden"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-neural-600 to-quantum-600 text-white font-semibold overflow-hidden w-full sm:w-auto text-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -311,7 +311,7 @@ export function HeroSection() {
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
               />
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center justify-center gap-2 text-sm sm:text-base md:text-lg">
                 Get in Touch
                 <motion.svg
                   width="20"
@@ -335,7 +335,7 @@ export function HeroSection() {
               href="/Dev_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-full glass-strong font-semibold hover:bg-white/10 transition-colors"
+              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full glass-strong font-semibold hover:bg-white/10 transition-colors w-full sm:w-auto text-center text-sm sm:text-base md:text-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

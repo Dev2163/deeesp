@@ -77,10 +77,12 @@ export function ContactSection() {
           >
             <span className="text-6xl">💬</span>
           </motion.div>
-          <h2 className="font-display text-5xl md:text-7xl mb-6">
-            <span className="text-gradient-quantum">Contact Me</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
+            <span className="text-gradient-quantum">
+              Contact Me
+            </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
             I'd love to hear from you — whether it's a project, collaboration, opportunity,
             or just a tech talk. Let's connect!
           </p>

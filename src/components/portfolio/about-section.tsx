@@ -110,12 +110,12 @@ export function AboutSection() {
             transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
             className="inline-block mb-4"
           >
-            <span className="text-6xl">👨‍💻</span>
+            <span className="text-4xl sm:text-5xl md:text-6xl">👨‍💻</span>
           </motion.div>
-          <h2 className="font-display text-5xl md:text-7xl mb-6">
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 px-4">
             <span className="text-gradient-quantum">About Me</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
             A passionate fresher developer and content creator from Gujarat, India,
             ready to make an impact in the tech world.
           </p>
