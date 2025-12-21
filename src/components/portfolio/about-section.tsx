@@ -121,23 +121,24 @@ export function AboutSection() {
           </p>
         </motion.div>
 
-        {/* Introduction & Education Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-20">
-          {/* Personal Introduction */}
+        {/* Introduction Card */}
+        <div className="max-w-7xl mx-auto mb-20">
           <Card3D delay={0.2}>
-            <div className="h-full p-8 rounded-3xl glass-strong shadow-neural hover:shadow-glow transition-shadow duration-500">
-              <div className="flex items-center gap-4 mb-6">
+            <div className="p-8 md:p-12 rounded-3xl glass-strong shadow-neural hover:shadow-glow transition-shadow duration-500 border border-purple-500/20">
+              <div className="flex items-center gap-4 mb-8">
                 <motion.div
                   animate={{ rotate: [0, 10, -10, 0] }}
                   transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                  className="text-5xl"
+                  className="text-5xl md:text-6xl"
                 >
                   👋
                 </motion.div>
-                <h3 className="font-display text-3xl">Hi, I'm Dev Suthar</h3>
+                <h3 className="font-display text-3xl md:text-4xl text-gradient-cosmic cosmic-glow">
+                  Hi, I'm Dev Suthar
+                </h3>
               </div>
 
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <div className="space-y-6 text-purple-200/90 leading-relaxed text-base md:text-lg">
                 <p>
                   A multi-skilled developer, creator, and lifelong learner passionate about
                   building impactful digital solutions. As a fresher in the tech industry,
@@ -148,97 +149,35 @@ export function AboutSection() {
                   unique creative approach to UI/UX design and user experience.
                 </p>
 
-                <div className="pt-6 space-y-3">
-                  <h4 className="font-semibold text-foreground text-lg mb-4">What I Can Build:</h4>
-                  {[
-                    { icon: "🌐", text: "Websites & Web Applications" },
-                    { icon: "📱", text: "Android and iOS Apps" },
-                    { icon: "💻", text: "Custom Software Solutions" }
-                  ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                      transition={{ delay: 0.4 + i * 0.1 }}
-                      className="flex items-center gap-3 p-3 rounded-xl glass hover:bg-white/10 transition-colors"
-                    >
-                      <span className="text-2xl">{item.icon}</span>
-                      <span>{item.text}</span>
-                    </motion.div>
-                  ))}
+                <div className="pt-6">
+                  <h4 className="font-semibold text-yellow-300 text-xl mb-6 flex items-center gap-2">
+                    <span className="text-2xl">✨</span>
+                    What I Can Build:
+                  </h4>
+                  <div className="grid sm:grid-cols-3 gap-4">
+                    {[
+                      { icon: "🌐", text: "Websites & Web Applications" },
+                      { icon: "📱", text: "Android and iOS Apps" },
+                      { icon: "💻", text: "Custom Software Solutions" }
+                    ].map((item, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ delay: 0.4 + i * 0.1 }}
+                        className="flex flex-col items-center gap-3 p-6 rounded-2xl glass hover:bg-purple-500/10 transition-colors border border-purple-500/20 text-center"
+                        whileHover={{ scale: 1.05, y: -5 }}
+                      >
+                        <span className="text-4xl">{item.icon}</span>
+                        <span className="font-medium text-purple-100">{item.text}</span>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </Card3D>
-
-          {/* Education - My Journey */}
-          <div className="space-y-6">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-              transition={{ delay: 0.3 }}
-              className="flex items-center gap-3 mb-8"
-            >
-              <motion.span
-                className="text-4xl"
-                animate={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-              >
-                🎓
-              </motion.span>
-              <h3 className="font-display text-3xl">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-lime-400 to-green-400">
-                  My Journey
-                </span>
-              </h3>
-            </motion.div>
-
-            {education.map((edu, i) => (
-              <Card3D key={i} delay={0.4 + i * 0.1}>
-                <div className="relative p-6 rounded-2xl bg-gradient-to-br from-void-900/90 to-void-800/90 border border-lime-500/20 shadow-lg hover:shadow-lime-500/20 transition-all duration-500 overflow-hidden group">
-                  {/* Animated gradient border effect */}
-                  <motion.div
-                    className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400/0 via-lime-400/20 to-green-400/0"
-                    animate={{
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                    }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    style={{ backgroundSize: '200% 100%' }}
-                  />
-
-                  <div className="relative z-10">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-start gap-3 flex-1">
-                        <motion.span
-                          className="text-3xl mt-1"
-                          whileHover={{ scale: 1.2, rotate: 360 }}
-                          transition={{ duration: 0.6 }}
-                        >
-                          {edu.icon}
-                        </motion.span>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-lg text-white mb-1">{edu.degree}</h4>
-                          <p className="text-lime-400 font-medium text-sm">{edu.period}</p>
-                        </div>
-                      </div>
-                      <motion.div
-                        className="px-4 py-2 rounded-full bg-gradient-to-r from-yellow-400/20 to-lime-400/20 border border-lime-400/30"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <span className="text-sm font-bold text-lime-400">CGPA: {edu.cgpa}</span>
-                      </motion.div>
-                    </div>
-                    <p className="text-void-300 leading-relaxed">{edu.description}</p>
-                  </div>
-
-                  {/* Decorative corner accent */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-lime-400/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-              </Card3D>
-            ))}
-          </div>
         </div>
-
         {/* Technologies - Infinite Scroll */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

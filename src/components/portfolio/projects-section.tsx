@@ -99,10 +99,7 @@ export function ProjectsSection() {
     : projects.filter(p => p.category === filter)
 
   return (
-    <section ref={sectionRef} id="projects" className="relative py-32 overflow-hidden noise-overlay">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-void-50/30 dark:via-void-900/30 to-background" />
-
+    <section ref={sectionRef} id="projects" className="relative py-32 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -120,11 +117,11 @@ export function ProjectsSection() {
             <span className="text-6xl">🚀</span>
           </motion.div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
-            <span className="text-gradient-neural">
+            <span className="text-gradient-cosmic cosmic-glow">
               My Projects
             </span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 px-4">
+          <p className="text-lg sm:text-xl text-purple-300 max-w-3xl mx-auto mb-8 px-4">
             Here are some of the projects I've worked on during my learning journey as a fresher developer.
           </p>
         </motion.div>
@@ -143,8 +140,8 @@ export function ProjectsSection() {
               className={`
                 relative px-8 py-4 rounded-full font-semibold transition-all duration-300
                 ${filter === category.name
-                  ? 'bg-gradient-to-r from-neural-600 to-quantum-600 text-white shadow-glow'
-                  : 'glass-strong hover:bg-white/10'
+                  ? 'bg-gradient-to-r from-yellow-500 via-purple-500 to-blue-500 text-white shadow-glow'
+                  : 'glass-strong hover:bg-purple-500/10 border border-purple-500/20'
                 }
               `}
               whileHover={{ scale: 1.05 }}
@@ -164,7 +161,7 @@ export function ProjectsSection() {
               {filter === category.name && (
                 <motion.div
                   layoutId="activeFilter"
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-neural-600 to-quantum-600 -z-10"
+                  className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-500 via-purple-500 to-blue-500 -z-10"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
@@ -194,7 +191,7 @@ export function ProjectsSection() {
                 onMouseLeave={() => setHoveredProject(null)}
                 className="group relative"
               >
-                <div className="relative h-full rounded-3xl overflow-hidden glass-strong shadow-void hover:shadow-glow transition-all duration-500">
+                <div className="relative h-full rounded-3xl overflow-hidden glass-strong shadow-void hover:shadow-glow transition-all duration-500 border border-purple-500/20">
                   {/* Project Image */}
                   <div className="relative h-64 overflow-hidden">
                     <motion.img
@@ -209,7 +206,7 @@ export function ProjectsSection() {
 
                     {/* Gradient Overlay */}
                     <motion.div
-                      className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
+                      className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     />
 
                     {/* Category Badge */}
@@ -218,7 +215,7 @@ export function ProjectsSection() {
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.3 + i * 0.1, type: "spring" }}
-                        className="px-4 py-2 rounded-full glass-strong backdrop-blur-xl text-sm font-semibold"
+                        className="px-4 py-2 rounded-full glass-strong backdrop-blur-xl text-sm font-semibold border border-purple-500/30"
                       >
                         {project.category === "Web" ? "🌐" : "📱"} {project.category}
                       </motion.div>
@@ -239,7 +236,7 @@ export function ProjectsSection() {
                           href={project.sourceCode}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 px-4 py-2 rounded-xl glass-strong backdrop-blur-xl text-center font-semibold hover:bg-white/20 transition-colors"
+                          className="flex-1 px-4 py-2 rounded-xl glass-strong backdrop-blur-xl text-center font-semibold hover:bg-purple-500/20 transition-colors border border-purple-500/30"
                         >
                           <span className="flex items-center justify-center gap-2">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -254,7 +251,7 @@ export function ProjectsSection() {
                           href={project.liveDemo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 px-4 py-2 rounded-xl bg-gradient-to-r from-neural-600 to-quantum-600 text-white text-center font-semibold hover:shadow-glow transition-shadow"
+                          className="flex-1 px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-500 via-purple-500 to-blue-500 text-white text-center font-semibold hover:shadow-glow transition-shadow"
                         >
                           <span className="flex items-center justify-center gap-2">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -270,15 +267,15 @@ export function ProjectsSection() {
                   {/* Project Info */}
                   <div className="p-6">
                     <motion.h3
-                      className="font-display text-2xl mb-1 group-hover:text-gradient-neural transition-all"
+                      className="font-display text-2xl mb-1 text-gradient-golden cosmic-glow transition-all"
                       animate={{
                         x: hoveredProject === i ? 5 : 0
                       }}
                     >
                       {project.title}
                     </motion.h3>
-                    <p className="text-sm text-muted-foreground mb-3">{project.subtitle}</p>
-                    <p className="text-muted-foreground mb-4 line-clamp-2">
+                    <p className="text-sm text-purple-300 mb-3">{project.subtitle}</p>
+                    <p className="text-purple-200/80 mb-4 line-clamp-2">
                       {project.description}
                     </p>
 
@@ -290,7 +287,7 @@ export function ProjectsSection() {
                           initial={{ opacity: 0, scale: 0 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.4 + i * 0.1 + techIndex * 0.05 }}
-                          className="px-3 py-1 rounded-lg glass text-xs font-medium"
+                          className="px-3 py-1 rounded-lg glass text-xs font-medium border border-purple-500/30 text-purple-200"
                         >
                           {tech}
                         </motion.span>
@@ -300,7 +297,7 @@ export function ProjectsSection() {
 
                   {/* Decorative gradient border */}
                   <motion.div
-                    className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-20 -z-10 blur-xl transition-opacity duration-500`}
+                    className="absolute inset-0 rounded-3xl bg-gradient-to-br from-yellow-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 -z-10 blur-xl transition-opacity duration-500"
                   />
                 </div>
               </motion.div>
@@ -316,21 +313,10 @@ export function ProjectsSection() {
             className="text-center py-20"
           >
             <span className="text-6xl mb-4 block">🔍</span>
-            <p className="text-xl text-muted-foreground">No projects found in this category</p>
+            <p className="text-xl text-purple-300">No projects found in this category</p>
           </motion.div>
         )}
       </div>
-
-      {/* Decorative elements */}
-      <motion.div
-        className="absolute top-40 right-10 w-72 h-72 rounded-full bg-gradient-to-br from-neural-500/10 to-quantum-500/10 blur-3xl"
-        animate={{
-          scale: [1, 1.3, 1],
-          x: [0, 50, 0],
-          y: [0, -30, 0]
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-      />
     </section>
   )
 }

@@ -9,6 +9,12 @@ import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Force dark mode on app load
+if (typeof window !== 'undefined') {
+  document.documentElement.classList.add('dark');
+  localStorage.setItem('dev-portfolio-theme', 'dark');
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark" storageKey="dev-portfolio-theme">

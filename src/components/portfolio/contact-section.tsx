@@ -107,7 +107,7 @@ export function ContactSection() {
           </motion.div>
 
           {/* Contact Cards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-3 gap-3 sm:gap-6 mb-12">
             {contactInfo.map((info, i) => (
               <motion.a
                 key={info.label}

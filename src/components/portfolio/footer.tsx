@@ -39,13 +39,14 @@ export function Footer() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Main Footer Content */}
-          <div className="grid md:grid-cols-3 gap-12 mb-12">
-            {/* Brand */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-12">
+            {/* Brand - Hidden on mobile */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="hidden md:block"
             >
               <h3 className="font-display text-3xl mb-4">
                 <span className="text-gradient-neural">Dev Suthar</span>
@@ -162,12 +163,6 @@ export function Footer() {
                 ❤️
               </motion.span>{" "}
               and code
-            </p>
-            <p className="flex items-center gap-2">
-              <span>Built with</span>
-              <span className="font-semibold text-gradient-neural">React</span>
-              <span>+</span>
-              <span className="font-semibold text-gradient-quantum">Framer Motion</span>
             </p>
           </motion.div>
         </div>

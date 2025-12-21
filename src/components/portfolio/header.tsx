@@ -11,8 +11,9 @@ export function Header() {
 
     const navItems = [
         { id: "home", label: "Home", icon: "🏠" },
-        { id: "about", label: "About", icon: "👨‍💻" },
         { id: "projects", label: "Projects", icon: "🚀" },
+        { id: "education", label: "Education", icon: "🎓" },
+        { id: "about", label: "About", icon: "👨‍💻" },
         { id: "contact", label: "Contact", icon: "💬" },
     ]
 

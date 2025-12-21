@@ -8,8 +8,6 @@ export function HeroSection() {
 
   // Scroll-based animations
   const { scrollY } = useScroll()
-  const y1 = useTransform(scrollY, [0, 300], [0, 100])
-  const y2 = useTransform(scrollY, [0, 300], [0, -50])
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
 
   // Smooth spring physics
@@ -19,7 +17,7 @@ export function HeroSection() {
 
   // Kinetic text animation
   const roles = [
-    "Android & iOS Developer",
+    "Android & Flutter Developer",
     "Web Developer",
     "Software Developer",
     "Video Editor"
@@ -74,138 +72,15 @@ export function HeroSection() {
     setIsHovering(false)
   }
 
-  // Floating particles
-  const ParticleField = () => {
-    const particles = Array.from({ length: 30 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 4 + 1,
-      duration: Math.random() * 20 + 10,
-      delay: Math.random() * 5
-    }))
-
-    return (
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute rounded-full bg-gradient-to-br from-neural-400/20 to-quantum-400/20"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              width: particle.size,
-              height: particle.size,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              x: [0, Math.random() * 50 - 25, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              delay: particle.delay,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-    )
-  }
-
-  // Neural network background
-  const NeuralNetwork = () => {
-    const nodes = Array.from({ length: 12 }, (_, i) => ({
-      id: i,
-      x: (i % 4) * 33.33,
-      y: Math.floor(i / 4) * 50,
-    }))
-
-    return (
-      <svg className="absolute inset-0 w-full h-full opacity-10" style={{ zIndex: 0 }}>
-        <defs>
-          <linearGradient id="neural-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(71, 133, 255)" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="rgb(168, 85, 247)" stopOpacity="0.3" />
-          </linearGradient>
-        </defs>
-        {nodes.map((node, i) =>
-          nodes.slice(i + 1).map((targetNode, j) => (
-            <motion.line
-              key={`${i}-${j}`}
-              x1={`${node.x}%`}
-              y1={`${node.y}%`}
-              x2={`${targetNode.x}%`}
-              y2={`${targetNode.y}%`}
-              stroke="url(#neural-gradient)"
-              strokeWidth="0.5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{
-                duration: 2,
-                delay: (i + j) * 0.1,
-                repeat: Infinity,
-                repeatType: "reverse",
-                repeatDelay: 1,
-              }}
-            />
-          ))
-        )}
-        {nodes.map((node) => (
-          <motion.circle
-            key={node.id}
-            cx={`${node.x}%`}
-            cy={`${node.y}%`}
-            r="3"
-            fill="url(#neural-gradient)"
-            initial={{ scale: 0 }}
-            animate={{ scale: [0, 1, 0.8, 1] }}
-            transition={{
-              duration: 2,
-              delay: node.id * 0.1,
-              repeat: Infinity,
-              repeatDelay: 3,
-            }}
-          />
-        ))}
-      </svg>
-    )
-  }
-
   return (
     <section
       ref={containerRef}
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={() => setIsHovering(true)}
     >
-      {/* Mesh gradient background */}
-      <div className="absolute inset-0 mesh-gradient-neural" />
-
-      {/* Neural network */}
-      <NeuralNetwork />
-
-      {/* Particle field */}
-      <ParticleField />
-
-      {/* Animated orbs */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-neural-500/20 to-quantum-500/20 blur-3xl"
-        style={{ y: y1 }}
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-quantum-500/20 to-photon-500/20 blur-3xl"
-        style={{ y: y2 }}
-        animate={{ scale: [1.2, 1, 1.2], rotate: [90, 0, 90] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-      />
-
       {/* Content */}
       <motion.div
         className="container mx-auto px-4 relative z-10"
