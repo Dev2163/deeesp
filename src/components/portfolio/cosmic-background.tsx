@@ -11,6 +11,9 @@ export function CosmicBackground() {
         const ctx = canvas.getContext('2d')
         if (!ctx) return
 
+        // Detect mobile device
+        const isMobile = window.innerWidth < 768
+
         // Set canvas size
         const resizeCanvas = () => {
             canvas.width = window.innerWidth
@@ -19,7 +22,8 @@ export function CosmicBackground() {
         resizeCanvas()
         window.addEventListener('resize', resizeCanvas)
 
-        // Star particles
+        // Star particles - Reduced for mobile
+        const starCount = isMobile ? 50 : 200
         const stars: Array<{
             x: number
             y: number
@@ -31,7 +35,7 @@ export function CosmicBackground() {
         }> = []
 
         // Create stars
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < starCount; i++) {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -43,7 +47,8 @@ export function CosmicBackground() {
             })
         }
 
-        // Golden dust particles
+        // Golden dust particles - Reduced for mobile
+        const dustCount = isMobile ? 15 : 50
         const dustParticles: Array<{
             x: number
             y: number
@@ -52,7 +57,7 @@ export function CosmicBackground() {
             opacity: number
         }> = []
 
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < dustCount; i++) {
             dustParticles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -93,11 +98,13 @@ export function CosmicBackground() {
             ctx.fillStyle = gradient
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-            // Draw nebula clouds
-            for (let i = 0; i < 3; i++) {
+            // Draw nebula clouds - Reduced for mobile
+            const nebulaCount = isMobile ? 2 : 3
+            for (let i = 0; i < nebulaCount; i++) {
                 const x = canvas.width * (0.3 + i * 0.2) + Math.sin(time + i) * 50
                 const y = canvas.height * (0.3 + i * 0.2) + Math.cos(time + i) * 50
-                const nebula = ctx.createRadialGradient(x, y, 0, x, y, 300)
+                const nebulaSize = isMobile ? 200 : 300
+                const nebula = ctx.createRadialGradient(x, y, 0, x, y, nebulaSize)
 
                 if (i === 0) {
                     nebula.addColorStop(0, 'rgba(138, 43, 226, 0.15)')
@@ -158,14 +165,16 @@ export function CosmicBackground() {
                 ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
                 ctx.fill()
 
-                // Add star glow
-                const starGlow = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3)
-                starGlow.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * 0.5})`)
-                starGlow.addColorStop(1, 'rgba(255, 255, 255, 0)')
-                ctx.fillStyle = starGlow
-                ctx.beginPath()
-                ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2)
-                ctx.fill()
+                // Add star glow - Skip on mobile for performance
+                if (!isMobile) {
+                    const starGlow = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3)
+                    starGlow.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * 0.5})`)
+                    starGlow.addColorStop(1, 'rgba(255, 255, 255, 0)')
+                    ctx.fillStyle = starGlow
+                    ctx.beginPath()
+                    ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2)
+                    ctx.fill()
+                }
             })
 
             // Update and draw golden dust particles
