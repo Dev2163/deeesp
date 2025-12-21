@@ -1,18 +1,31 @@
 import { motion } from "framer-motion"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function CosmicBackground() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
+    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
+        // Detect mobile device
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    useEffect(() => {
+        // Skip canvas rendering on mobile - use CSS only
+        if (isMobile) return
+
         const canvas = canvasRef.current
         if (!canvas) return
 
         const ctx = canvas.getContext('2d')
         if (!ctx) return
-
-        // Detect mobile device
-        const isMobile = window.innerWidth < 768
 
         // Set canvas size
         const resizeCanvas = () => {
@@ -22,8 +35,7 @@ export function CosmicBackground() {
         resizeCanvas()
         window.addEventListener('resize', resizeCanvas)
 
-        // Star particles - Reduced for mobile
-        const starCount = isMobile ? 50 : 200
+        // Star particles
         const stars: Array<{
             x: number
             y: number
@@ -35,7 +47,7 @@ export function CosmicBackground() {
         }> = []
 
         // Create stars
-        for (let i = 0; i < starCount; i++) {
+        for (let i = 0; i < 200; i++) {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -47,8 +59,7 @@ export function CosmicBackground() {
             })
         }
 
-        // Golden dust particles - Reduced for mobile
-        const dustCount = isMobile ? 15 : 50
+        // Golden dust particles
         const dustParticles: Array<{
             x: number
             y: number
@@ -57,7 +68,7 @@ export function CosmicBackground() {
             opacity: number
         }> = []
 
-        for (let i = 0; i < dustCount; i++) {
+        for (let i = 0; i < 50; i++) {
             dustParticles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -98,13 +109,11 @@ export function CosmicBackground() {
             ctx.fillStyle = gradient
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-            // Draw nebula clouds - Reduced for mobile
-            const nebulaCount = isMobile ? 2 : 3
-            for (let i = 0; i < nebulaCount; i++) {
+            // Draw nebula clouds
+            for (let i = 0; i < 3; i++) {
                 const x = canvas.width * (0.3 + i * 0.2) + Math.sin(time + i) * 50
                 const y = canvas.height * (0.3 + i * 0.2) + Math.cos(time + i) * 50
-                const nebulaSize = isMobile ? 200 : 300
-                const nebula = ctx.createRadialGradient(x, y, 0, x, y, nebulaSize)
+                const nebula = ctx.createRadialGradient(x, y, 0, x, y, 300)
 
                 if (i === 0) {
                     nebula.addColorStop(0, 'rgba(138, 43, 226, 0.15)')
@@ -133,7 +142,7 @@ export function CosmicBackground() {
                 }
             }
 
-            // Draw constellation points (bright stars)
+            // Draw constellation points
             constellationPoints.forEach(point => {
                 const glow = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, 8)
                 glow.addColorStop(0, 'rgba(255, 215, 0, 0.8)')
@@ -165,16 +174,14 @@ export function CosmicBackground() {
                 ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
                 ctx.fill()
 
-                // Add star glow - Skip on mobile for performance
-                if (!isMobile) {
-                    const starGlow = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3)
-                    starGlow.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * 0.5})`)
-                    starGlow.addColorStop(1, 'rgba(255, 255, 255, 0)')
-                    ctx.fillStyle = starGlow
-                    ctx.beginPath()
-                    ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2)
-                    ctx.fill()
-                }
+                // Add star glow
+                const starGlow = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3)
+                starGlow.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * 0.5})`)
+                starGlow.addColorStop(1, 'rgba(255, 255, 255, 0)')
+                ctx.fillStyle = starGlow
+                ctx.beginPath()
+                ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2)
+                ctx.fill()
             })
 
             // Update and draw golden dust particles
@@ -213,52 +220,67 @@ export function CosmicBackground() {
             window.removeEventListener('resize', resizeCanvas)
             cancelAnimationFrame(animationFrame)
         }
-    }, [])
+    }, [isMobile])
 
     return (
         <>
-            {/* Canvas for animated cosmic background */}
-            <canvas
-                ref={canvasRef}
-                className="fixed inset-0 w-full h-full"
-                style={{ zIndex: 0 }}
-            />
-
-            {/* Additional overlay effects */}
-            <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
-                {/* Teal glow overlay */}
-                <motion.div
-                    className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl"
-                    style={{
-                        background: 'radial-gradient(circle, rgba(0, 206, 209, 0.15) 0%, transparent 70%)'
-                    }}
-                    animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.5, 0.3],
-                        x: [0, 50, 0],
-                        y: [0, -30, 0]
-                    }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
+            {/* Canvas for desktop - animated cosmic background */}
+            {!isMobile && (
+                <canvas
+                    ref={canvasRef}
+                    className="fixed inset-0 w-full h-full"
+                    style={{ zIndex: 0 }}
                 />
+            )}
 
+            {/* CSS-only background for mobile */}
+            {isMobile && (
+                <div
+                    className="fixed inset-0 w-full h-full"
+                    style={{
+                        zIndex: 0,
+                        background: 'radial-gradient(ellipse at center, #1a0a2e 0%, #16213e 30%, #0f3460 60%, #0a1929 100%)'
+                    }}
+                >
+                    {/* Simple CSS stars for mobile */}
+                    <div className="absolute inset-0 opacity-60">
+                        {[...Array(30)].map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="absolute w-1 h-1 bg-white rounded-full"
+                                style={{
+                                    left: `${Math.random() * 100}%`,
+                                    top: `${Math.random() * 100}%`,
+                                }}
+                                animate={{
+                                    opacity: [0.3, 1, 0.3],
+                                    scale: [0.5, 1, 0.5],
+                                }}
+                                transition={{
+                                    duration: 2 + Math.random() * 2,
+                                    repeat: Infinity,
+                                    delay: Math.random() * 2,
+                                }}
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Overlay effects - simplified for mobile */}
+            <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
                 {/* Purple glow overlay */}
                 <motion.div
-                    className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
+                    className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 rounded-full blur-3xl"
                     style={{
                         background: 'radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, transparent 70%)'
                     }}
                     animate={{
                         scale: [1.2, 1, 1.2],
                         opacity: [0.4, 0.6, 0.4],
-                        x: [0, -50, 0],
-                        y: [0, 30, 0]
                     }}
                     transition={{
-                        duration: 18,
+                        duration: isMobile ? 12 : 18,
                         repeat: Infinity,
                         ease: "easeInOut"
                     }}
@@ -266,17 +288,16 @@ export function CosmicBackground() {
 
                 {/* Royal blue glow */}
                 <motion.div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 md:w-[600px] h-96 md:h-[600px] rounded-full blur-3xl"
                     style={{
                         background: 'radial-gradient(circle, rgba(65, 105, 225, 0.12) 0%, transparent 70%)'
                     }}
                     animate={{
                         scale: [1, 1.15, 1],
                         opacity: [0.3, 0.5, 0.3],
-                        rotate: [0, 180, 360]
                     }}
                     transition={{
-                        duration: 25,
+                        duration: isMobile ? 15 : 25,
                         repeat: Infinity,
                         ease: "linear"
                     }}
