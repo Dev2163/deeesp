@@ -303,6 +303,18 @@ body {
     }
 }
 
+@keyframes slide-down {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 .animate-float-gentle {
     animation: float-gentle 8s ease-in-out infinite;
 }
@@ -329,6 +341,10 @@ body {
 
 .animate-quantum-shift {
     animation: quantum-shift 10s ease-in-out infinite;
+}
+
+.animate-slide-down {
+    animation: slide-down 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* ========================================
