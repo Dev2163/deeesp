@@ -234,7 +234,8 @@ export function CosmicBackground() {
                 <div
                     className="fixed inset-0 w-full h-full pointer-events-none"
                     style={{
-                        zIndex: -1,
+                        zIndex: -10,
+                        position: 'fixed',
                         background: 'linear-gradient(180deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
                     }}
                 />
