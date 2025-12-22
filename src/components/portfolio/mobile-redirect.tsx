@@ -26,21 +26,60 @@ export function MobileRedirect() {
     }
 
     return (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0f0f1a] p-6">
+        <div
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                width: '100vw',
+                height: '100vh',
+                zIndex: 999999,
+                backgroundColor: '#0f0f1a',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '24px'
+            }}
+        >
             {/* Simple Card */}
-            <div className="bg-[#1a1a2e] border border-gray-700 rounded-lg p-8 max-w-md w-full text-center">
+            <div
+                style={{
+                    backgroundColor: '#1a1a2e',
+                    border: '1px solid #4a5568',
+                    borderRadius: '8px',
+                    padding: '32px',
+                    maxWidth: '448px',
+                    width: '100%',
+                    textAlign: 'center'
+                }}
+            >
                 {/* Icon */}
-                <div className="flex justify-center mb-6">
-                    <div className="bg-blue-500/10 p-4 rounded-full">
-                        <Monitor className="w-12 h-12 text-blue-400" />
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
+                    <div style={{
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        padding: '16px',
+                        borderRadius: '50%'
+                    }}>
+                        <Monitor style={{ width: '48px', height: '48px', color: '#60a5fa' }} />
                     </div>
                 </div>
 
                 {/* Message */}
-                <h2 className="text-2xl font-bold text-white mb-4">
+                <h2 style={{
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    color: 'white',
+                    marginBottom: '16px'
+                }}>
                     Desktop Only
                 </h2>
-                <p className="text-gray-300 text-base leading-relaxed">
+                <p style={{
+                    color: '#d1d5db',
+                    fontSize: '16px',
+                    lineHeight: '1.6'
+                }}>
                     Please open this website on a laptop or desktop computer for the best experience.
                 </p>
             </div>
