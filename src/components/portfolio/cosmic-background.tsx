@@ -229,42 +229,19 @@ export function CosmicBackground() {
                 />
             )}
 
-            {/* CSS-only background for mobile */}
+            {/* CSS-only background for mobile - ULTRA SIMPLE */}
             {isMobile && (
                 <div
                     className="fixed inset-0 w-full h-full pointer-events-none"
                     style={{
                         zIndex: -1,
-                        background: 'radial-gradient(ellipse at center, #1a0a2e 0%, #16213e 30%, #0f3460 60%, #0a1929 100%)'
+                        background: 'linear-gradient(180deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
                     }}
-                >
-                    {/* Simple CSS stars for mobile */}
-                    <div className="absolute inset-0 opacity-60">
-                        {[...Array(30)].map((_, i) => (
-                            <motion.div
-                                key={i}
-                                className="absolute w-1 h-1 bg-white rounded-full"
-                                style={{
-                                    left: `${Math.random() * 100}%`,
-                                    top: `${Math.random() * 100}%`,
-                                }}
-                                animate={{
-                                    opacity: [0.3, 1, 0.3],
-                                    scale: [0.5, 1, 0.5],
-                                }}
-                                transition={{
-                                    duration: 2 + Math.random() * 2,
-                                    repeat: Infinity,
-                                    delay: Math.random() * 2,
-                                }}
-                            />
-                        ))}
-                    </div>
-                </div>
+                />
             )}
 
-            {/* Overlay effects - simplified for mobile */}
-            <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+            {/* Overlay effects - Desktop only */}
+            <div className="fixed inset-0 pointer-events-none hidden md:block" style={{ zIndex: 1 }}>
                 {/* Purple glow overlay */}
                 <motion.div
                     className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 rounded-full blur-3xl"

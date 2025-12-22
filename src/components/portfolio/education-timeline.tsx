@@ -147,9 +147,9 @@ export function EducationTimeline() {
                                 >
                                     {/* Card Background with Glass Effect */}
                                     <div className="relative rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-green-900/30 via-teal-900/20 to-cyan-900/30 border border-green-500/30 shadow-2xl">
-                                        {/* Animated Glow Border */}
+                                        {/* Animated Glow Border - Desktop only */}
                                         <motion.div
-                                            className="absolute inset-0 rounded-3xl"
+                                            className="absolute inset-0 rounded-3xl hidden md:block"
                                             style={{
                                                 background: `linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(0, 255, 127, 0.2), rgba(0, 206, 209, 0.3))`,
                                                 filter: 'blur(20px)',

@@ -635,8 +635,23 @@ body {
     }
 
     /* Reduce motion for better mobile performance */
-    * {
-        animation-duration: 0.5s !important;
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-duration: 0.15s !important;
+    }
+
+    /* Disable all custom animations */
+    .animate-float-gentle,
+    .animate-pulse-glow,
+    .animate-shimmer,
+    .animate-reveal-up,
+    .animate-magnetic,
+    .animate-neural-pulse,
+    .animate-quantum-shift,
+    .animate-scroll-infinite {
+        animation: none !important;
     }
 }
 
