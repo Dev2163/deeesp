@@ -141,12 +141,12 @@ export function Header() {
                         transition={{ duration: 0.2 }}
                         className="md:hidden mt-4 mx-4"
                     >
-                        <div className="rounded-2xl glass-strong p-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div className="rounded-2xl glass-strong p-4 grid grid-cols-2 gap-2">
                             {navItems.map((item) => (
                                 <motion.button
                                     key={item.id}
                                     onClick={() => scrollToSection(item.id)}
-                                    className={`relative px-4 py-4 rounded-xl font-medium transition-all text-sm ${activeSection === item.id
+                                    className={`relative px-4 py-3 rounded-xl font-medium transition-all ${activeSection === item.id
                                         ? 'text-white'
                                         : 'hover:bg-white/10'
                                         }`}

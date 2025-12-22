@@ -8,6 +8,7 @@ import { Footer } from "@/components/portfolio/footer"
 import { SplashScreen } from "@/components/portfolio/splash-screen"
 import { CustomCursor } from "@/components/portfolio/custom-cursor"
 import { CosmicBackground } from "@/components/portfolio/cosmic-background"
+import { MobileRedirect } from "@/components/portfolio/mobile-redirect"
 import { useState } from "react"
 
 export default function Index() {
@@ -19,19 +20,12 @@ export default function Index() {
 
     return (
         <>
+            <MobileRedirect />
             <CustomCursor />
             <CosmicBackground />
-            <div
-                className="min-h-screen relative"
-                style={{
-                    zIndex: 100,
-                    position: 'relative',
-                    color: '#ffffff',
-                    background: 'transparent'
-                }}
-            >
+            <div className="min-h-screen bg-transparent relative z-10">
                 <Header />
-                <main style={{ position: 'relative', zIndex: 100 }}>
+                <main>
                     <HeroSection />
                     <ProjectsSection />
                     <EducationTimeline />

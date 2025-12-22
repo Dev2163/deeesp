@@ -105,10 +105,10 @@ export function HeroSection() {
           {/* Main heading with magnetic effect */}
           <motion.div
             style={{ x, y }}
-            className="mb-4 md:mb-6"
+            className="mb-6"
           >
             <motion.h1
-              className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-2 md:mb-4 leading-tight"
+              className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-9xl mb-4"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -146,9 +146,9 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="mb-6 md:mb-8 min-h-[3rem] sm:min-h-[3.5rem] md:min-h-[4rem] flex items-center justify-center px-4"
+            className="mb-8 h-12 sm:h-14 md:h-16 flex items-center justify-center px-4"
           >
-            <span className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium text-muted-foreground text-center">
+            <span className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-medium text-muted-foreground text-center">
               {displayText}
               <motion.span
                 animate={{ opacity: [1, 0] }}
@@ -163,7 +163,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed px-4"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed px-4"
           >
             A passionate developer and content creator from Gujarat, India.
             Specialized in Android & Flutter development with a creative eye for
@@ -175,7 +175,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-stretch sm:items-center px-4 w-full sm:w-auto max-w-md sm:max-w-none mx-auto"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4"
           >
             <motion.a
               href="#contact"

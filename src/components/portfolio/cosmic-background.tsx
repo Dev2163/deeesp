@@ -1,29 +1,21 @@
 import { motion } from "framer-motion"
-import { useEffect, useRef, useState, useMemo, useCallback } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function CosmicBackground() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [isMobile, setIsMobile] = useState(false)
-    const animationFrameRef = useRef<number>()
 
-    // Memoize mobile detection
     useEffect(() => {
+        // Detect mobile device
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 768)
         }
 
         checkMobile()
-        window.addEventListener('resize', checkMobile, { passive: true })
+        window.addEventListener('resize', checkMobile)
 
         return () => window.removeEventListener('resize', checkMobile)
     }, [])
-
-    // Memoize particle counts based on device
-    const particleCounts = useMemo(() => ({
-        stars: isMobile ? 0 : 150, // Reduced from 200
-        dust: isMobile ? 0 : 30,   // Reduced from 50
-        constellations: isMobile ? 0 : 8 // Reduced from 12
-    }), [isMobile])
 
     useEffect(() => {
         // Skip canvas rendering on mobile - use CSS only
@@ -32,113 +24,123 @@ export function CosmicBackground() {
         const canvas = canvasRef.current
         if (!canvas) return
 
-        const ctx = canvas.getContext('2d', { alpha: false })
+        const ctx = canvas.getContext('2d')
         if (!ctx) return
 
         // Set canvas size
         const resizeCanvas = () => {
-            const dpr = Math.min(window.devicePixelRatio || 1, 2) // Limit DPR for performance
-            canvas.width = window.innerWidth * dpr
-            canvas.height = window.innerHeight * dpr
-            canvas.style.width = `${window.innerWidth}px`
-            canvas.style.height = `${window.innerHeight}px`
-            ctx.scale(dpr, dpr)
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
         }
         resizeCanvas()
-        window.addEventListener('resize', resizeCanvas, { passive: true })
+        window.addEventListener('resize', resizeCanvas)
 
-        // Memoized particle generation
-        const createParticles = () => {
-            const stars = Array.from({ length: particleCounts.stars }, () => ({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
+        // Star particles
+        const stars: Array<{
+            x: number
+            y: number
+            size: number
+            speedX: number
+            speedY: number
+            brightness: number
+            twinkleSpeed: number
+        }> = []
+
+        // Create stars
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
                 size: Math.random() * 2 + 0.5,
                 speedX: (Math.random() - 0.5) * 0.1,
                 speedY: (Math.random() - 0.5) * 0.1,
                 brightness: Math.random(),
                 twinkleSpeed: Math.random() * 0.02 + 0.01
-            }))
+            })
+        }
 
-            const dustParticles = Array.from({ length: particleCounts.dust }, () => ({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
+        // Golden dust particles
+        const dustParticles: Array<{
+            x: number
+            y: number
+            size: number
+            speedY: number
+            opacity: number
+        }> = []
+
+        for (let i = 0; i < 50; i++) {
+            dustParticles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
                 size: Math.random() * 3 + 1,
                 speedY: Math.random() * 0.5 + 0.2,
                 opacity: Math.random() * 0.5 + 0.3
-            }))
-
-            const constellationPoints = Array.from({ length: particleCounts.constellations }, () => ({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight
-            }))
-
-            return { stars, dustParticles, constellationPoints }
+            })
         }
 
-        const { stars, dustParticles, constellationPoints } = createParticles()
+        // Constellation points
+        const constellationPoints: Array<{ x: number; y: number }> = []
+        for (let i = 0; i < 12; i++) {
+            constellationPoints.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height
+            })
+        }
 
+        let animationFrame: number
         let time = 0
-        let lastTime = performance.now()
-        const targetFPS = 30 // Reduced from 60 for better performance
-        const frameInterval = 1000 / targetFPS
 
-        const animate = (currentTime: number) => {
-            const deltaTime = currentTime - lastTime
-
-            if (deltaTime < frameInterval) {
-                animationFrameRef.current = requestAnimationFrame(animate)
-                return
-            }
-
-            lastTime = currentTime - (deltaTime % frameInterval)
+        const animate = () => {
             time += 0.01
 
             // Create nebula gradient background
             const gradient = ctx.createRadialGradient(
-                window.innerWidth / 2,
-                window.innerHeight / 2,
+                canvas.width / 2,
+                canvas.height / 2,
                 0,
-                window.innerWidth / 2,
-                window.innerHeight / 2,
-                window.innerWidth
+                canvas.width / 2,
+                canvas.height / 2,
+                canvas.width
             )
             gradient.addColorStop(0, '#1a0a2e')
             gradient.addColorStop(0.3, '#16213e')
             gradient.addColorStop(0.6, '#0f3460')
             gradient.addColorStop(1, '#0a1929')
             ctx.fillStyle = gradient
-            ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-            // Draw nebula clouds (optimized)
+            // Draw nebula clouds
             for (let i = 0; i < 3; i++) {
-                const x = window.innerWidth * (0.3 + i * 0.2) + Math.sin(time + i) * 50
-                const y = window.innerHeight * (0.3 + i * 0.2) + Math.cos(time + i) * 50
+                const x = canvas.width * (0.3 + i * 0.2) + Math.sin(time + i) * 50
+                const y = canvas.height * (0.3 + i * 0.2) + Math.cos(time + i) * 50
                 const nebula = ctx.createRadialGradient(x, y, 0, x, y, 300)
 
-                const colors = [
-                    ['rgba(138, 43, 226, 0.15)', 'rgba(138, 43, 226, 0)'],
-                    ['rgba(0, 191, 255, 0.12)', 'rgba(0, 191, 255, 0)'],
-                    ['rgba(72, 61, 139, 0.1)', 'rgba(72, 61, 139, 0)']
-                ]
-
-                nebula.addColorStop(0, colors[i][0])
-                nebula.addColorStop(1, colors[i][1])
+                if (i === 0) {
+                    nebula.addColorStop(0, 'rgba(138, 43, 226, 0.15)')
+                    nebula.addColorStop(1, 'rgba(138, 43, 226, 0)')
+                } else if (i === 1) {
+                    nebula.addColorStop(0, 'rgba(0, 191, 255, 0.12)')
+                    nebula.addColorStop(1, 'rgba(0, 191, 255, 0)')
+                } else {
+                    nebula.addColorStop(0, 'rgba(72, 61, 139, 0.1)')
+                    nebula.addColorStop(1, 'rgba(72, 61, 139, 0)')
+                }
 
                 ctx.fillStyle = nebula
-                ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+                ctx.fillRect(0, 0, canvas.width, canvas.height)
             }
 
             // Draw constellation lines
             ctx.strokeStyle = 'rgba(255, 215, 0, 0.3)'
             ctx.lineWidth = 1
-            ctx.beginPath()
             for (let i = 0; i < constellationPoints.length - 1; i++) {
                 if (i % 3 !== 2) {
+                    ctx.beginPath()
                     ctx.moveTo(constellationPoints[i].x, constellationPoints[i].y)
                     ctx.lineTo(constellationPoints[i + 1].x, constellationPoints[i + 1].y)
+                    ctx.stroke()
                 }
             }
-            ctx.stroke()
 
             // Draw constellation points
             constellationPoints.forEach(point => {
@@ -152,7 +154,7 @@ export function CosmicBackground() {
                 ctx.fill()
             })
 
-            // Update and draw stars (optimized)
+            // Update and draw stars
             stars.forEach(star => {
                 star.x += star.speedX
                 star.y += star.speedY
@@ -162,15 +164,19 @@ export function CosmicBackground() {
                     star.twinkleSpeed *= -1
                 }
 
-                if (star.x < 0) star.x = window.innerWidth
-                if (star.x > window.innerWidth) star.x = 0
-                if (star.y < 0) star.y = window.innerHeight
-                if (star.y > window.innerHeight) star.y = 0
+                if (star.x < 0) star.x = canvas.width
+                if (star.x > canvas.width) star.x = 0
+                if (star.y < 0) star.y = canvas.height
+                if (star.y > canvas.height) star.y = 0
 
-                // Draw star with glow in one pass
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.brightness})`
+                ctx.beginPath()
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
+                ctx.fill()
+
+                // Add star glow
                 const starGlow = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3)
-                starGlow.addColorStop(0, `rgba(255, 255, 255, ${star.brightness})`)
-                starGlow.addColorStop(0.3, `rgba(255, 255, 255, ${star.brightness * 0.5})`)
+                starGlow.addColorStop(0, `rgba(255, 255, 255, ${star.brightness * 0.5})`)
                 starGlow.addColorStop(1, 'rgba(255, 255, 255, 0)')
                 ctx.fillStyle = starGlow
                 ctx.beginPath()
@@ -183,8 +189,8 @@ export function CosmicBackground() {
                 particle.y -= particle.speedY
 
                 if (particle.y < 0) {
-                    particle.y = window.innerHeight
-                    particle.x = Math.random() * window.innerWidth
+                    particle.y = canvas.height
+                    particle.x = Math.random() * canvas.width
                 }
 
                 const dustGlow = ctx.createRadialGradient(
@@ -205,18 +211,16 @@ export function CosmicBackground() {
                 ctx.fill()
             })
 
-            animationFrameRef.current = requestAnimationFrame(animate)
+            animationFrame = requestAnimationFrame(animate)
         }
 
-        animationFrameRef.current = requestAnimationFrame(animate)
+        animate()
 
         return () => {
             window.removeEventListener('resize', resizeCanvas)
-            if (animationFrameRef.current) {
-                cancelAnimationFrame(animationFrameRef.current)
-            }
+            cancelAnimationFrame(animationFrame)
         }
-    }, [isMobile, particleCounts])
+    }, [isMobile])
 
     return (
         <>
@@ -229,20 +233,42 @@ export function CosmicBackground() {
                 />
             )}
 
-            {/* CSS-only background for mobile - ULTRA SIMPLE */}
+            {/* CSS-only background for mobile */}
             {isMobile && (
                 <div
                     className="fixed inset-0 w-full h-full pointer-events-none"
                     style={{
-                        zIndex: -10,
-                        position: 'fixed',
-                        background: 'linear-gradient(180deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
+                        zIndex: -1,
+                        background: 'radial-gradient(ellipse at center, #1a0a2e 0%, #16213e 30%, #0f3460 60%, #0a1929 100%)'
                     }}
-                />
+                >
+                    {/* Simple CSS stars for mobile */}
+                    <div className="absolute inset-0 opacity-60">
+                        {[...Array(30)].map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="absolute w-1 h-1 bg-white rounded-full"
+                                style={{
+                                    left: `${Math.random() * 100}%`,
+                                    top: `${Math.random() * 100}%`,
+                                }}
+                                animate={{
+                                    opacity: [0.3, 1, 0.3],
+                                    scale: [0.5, 1, 0.5],
+                                }}
+                                transition={{
+                                    duration: 2 + Math.random() * 2,
+                                    repeat: Infinity,
+                                    delay: Math.random() * 2,
+                                }}
+                            />
+                        ))}
+                    </div>
+                </div>
             )}
 
-            {/* Overlay effects - Desktop only */}
-            <div className="fixed inset-0 pointer-events-none hidden md:block" style={{ zIndex: 1 }}>
+            {/* Overlay effects - simplified for mobile */}
+            <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
                 {/* Purple glow overlay */}
                 <motion.div
                     className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 rounded-full blur-3xl"
