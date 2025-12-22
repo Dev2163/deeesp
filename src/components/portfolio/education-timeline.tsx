@@ -65,9 +65,9 @@ export function EducationTimeline() {
 
                 {/* Celestial Road Container */}
                 <div className="relative max-w-5xl mx-auto">
-                    {/* Golden Constellation Path - SVG */}
+                    {/* Golden Constellation Path - SVG (Hidden on mobile for performance) */}
                     <svg
-                        className="absolute inset-0 w-full h-full pointer-events-none"
+                        className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
                         style={{ zIndex: 0 }}
                     >
                         <defs>
@@ -129,7 +129,7 @@ export function EducationTimeline() {
                     </svg>
 
                     {/* Education Cards */}
-                    <div className="relative space-y-32 pt-20">
+                    <div className="relative space-y-16 md:space-y-32 pt-10 md:pt-20">
                         {educationSteps.map((step, index) => (
                             <motion.div
                                 key={step.id}
@@ -137,7 +137,7 @@ export function EducationTimeline() {
                                 animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: index % 2 === 0 ? -100 : 100, y: 50 }}
                                 transition={{ duration: 0.8, delay: index * 0.4 }}
                                 onMouseEnter={() => setActiveStep(index)}
-                                className={`relative ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'} max-w-2xl`}
+                                className={`relative ${index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'} max-w-2xl`}
                             >
                                 {/* Glowing Holographic Card */}
                                 <motion.div

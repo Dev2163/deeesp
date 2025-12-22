@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
 
+/* ========================================
+   MOBILE VIEWPORT FIX - CRITICAL
+   Prevents blank screen on mobile devices
+   ======================================== */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100dvh;
+    /* Modern mobile viewport height */
+    min-height: 100vh;
+    /* Fallback for older browsers */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -590,6 +608,36 @@ body {
     .shadow-glow {
         box-shadow: 0 0 24px -8px rgba(71, 133, 255, 0.3);
     }
+
+    /* Better text rendering on mobile */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Prevent text size adjustment on orientation change */
+    html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    /* Optimize images for mobile */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Better spacing for mobile */
+    section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Reduce motion for better mobile performance */
+    * {
+        animation-duration: 0.5s !important;
+    }
 }
 
 /* Extra small devices */
@@ -664,5 +712,57 @@ body {
     /* Disable complex hover effects */
     .magnetic-element:hover {
         transform: none;
+    }
+}
+
+/* ========================================
+   CANVAS / PARTICLE BACKGROUND FIX
+   Ensures background stays behind content
+   ======================================== */
+.particle-field,
+canvas {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+}
+
+/* ========================================
+   MOBILE EMERGENCY SAFETY RULES
+   Prevents layout collapse on mobile
+   ======================================== */
+@media (max-width: 768px) {
+
+    /* Prevent fixed heights from breaking layout */
+    section:not(.splash-screen) {
+        height: auto !important;
+    }
+
+    /* Ensure content is always visible */
+    main,
+    main>* {
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Fix viewport issues */
+    .min-h-screen {
+        min-height: 100dvh;
+        min-height: 100vh;
+        /* Fallback */
+    }
+
+    /* Prevent horizontal scroll */
+    body,
+    html {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    /* Ensure backgrounds don't cover content */
+    [class*="background"],
+    [class*="cosmic"],
+    [style*="z-index: 0"] {
+        z-index: -1 !important;
     }
 }
