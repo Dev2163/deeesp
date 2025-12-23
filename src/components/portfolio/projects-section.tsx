@@ -49,6 +49,8 @@ export function ProjectsSection() {
       technologies: ["Kotlin", "Firebase"],
       category: "Mobile",
       gradient: "from-plasma-500 to-neural-500",
+      sourceCode: "https://github.com/Dev2163/ev_app",
+      liveDemo: "https://drive.google.com/drive/folders/1u3ZGEb1pPxRWUq2C6MJIl6vvqAqCLlYU?usp=drive_link",
     },
     {
       title: "Grocery Purchase",
@@ -58,6 +60,8 @@ export function ProjectsSection() {
       technologies: ["Flutter", "SQLite"],
       category: "Mobile",
       gradient: "from-neural-500 to-photon-500",
+      sourceCode: "https://github.com/Dev2163/grocery_purchase",
+      liveDemo: "https://drive.google.com/drive/folders/1u3ZGEb1pPxRWUq2C6MJIl6vvqAqCLlYU?usp=drive_link",
     },
     {
       title: "Sundarkand Booking",
@@ -67,6 +71,8 @@ export function ProjectsSection() {
       technologies: ["Flutter", "SQLite"],
       category: "Mobile",
       gradient: "from-quantum-500 to-plasma-500",
+      sourceCode: "https://github.com/Dev2163/sundarkand_booking",
+
     },
     {
       title: "Fixsnap",
@@ -76,6 +82,8 @@ export function ProjectsSection() {
       technologies: ["Flutter", "MongoDB", "Node.js", "Express.js"],
       category: "Mobile",
       gradient: "from-photon-500 to-quantum-500",
+      sourceCode: "https://github.com/Dev2163/fixsnap",
+      liveDemo: "#",
     },
     {
       title: "Over Expence",
@@ -85,6 +93,19 @@ export function ProjectsSection() {
       technologies: ["Flutter", "SQLite"],
       category: "Mobile",
       gradient: "from-plasma-500 to-photon-500",
+      sourceCode: "https://github.com/Dev2163/over-Expence",
+      liveDemo: "https://drive.google.com/drive/folders/1axyuP37mHb9MPyZ71A4h4xONKQVBGv61?usp=drive_link",
+    },
+    {
+      title: "Portfolio",
+      subtitle: "Portfolio Website",
+      description: "A portfolio website showcasing my skills and projects.",
+      image: "/images/portfolio.png",
+      technologies: ["React", "Node.js"],
+      category: "Web",
+      gradient: "from-quantum-500 to-plasma-500",
+      sourceCode: "https://github.com/Dev2163/devpot",
+      liveDemo: "https://devpot.vercel.app/",
     },
   ]
 
