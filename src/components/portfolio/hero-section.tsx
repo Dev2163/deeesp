@@ -76,7 +76,7 @@ export function HeroSection() {
     <section
       ref={containerRef}
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={() => setIsHovering(true)}
@@ -102,42 +102,16 @@ export function HeroSection() {
             <span className="text-sm font-medium">Available for Work</span>
           </motion.div>
 
-          {/* Main heading with magnetic effect */}
-          <motion.div
-            style={{ x, y }}
-            className="mb-6"
-          >
+          {/* Main heading with simple animation */}
+          <motion.div className="mb-6">
             <motion.h1
               className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-9xl mb-4"
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             >
-              <span className="inline-block">
-                {["H", "i", ",", " ", "I", "'", "m"].map((char, i) => (
-                  <motion.span
-                    key={i}
-                    className="kinetic-text inline-block"
-                    whileHover={{ y: -10, color: "rgb(71, 133, 255)" }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </span>
-              <br />
-              <span className="text-gradient-neural">
-                {["D", "e", "v"].map((char, i) => (
-                  <motion.span
-                    key={i}
-                    className="kinetic-text inline-block"
-                    whileHover={{ y: -10, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </span>
+              Hi, I'm <br />
+              <span className="text-gradient-neural">Dev</span>
             </motion.h1>
           </motion.div>
 
@@ -153,7 +127,7 @@ export function HeroSection() {
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-0.5 sm:w-1 h-6 sm:h-8 md:h-10 bg-neural-500 ml-1"
+                className="inline-block w-0.5 sm:w-1 h-6 sm:h-8 md:h-10 bg-blue-500 ml-1"
               />
             </span>
           </motion.div>
@@ -163,7 +137,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed px-4"
+            className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-12 leading-relaxed px-4"
           >
             A passionate developer and content creator from Gujarat, India.
             Specialized in Android & Flutter development with a creative eye for
@@ -179,12 +153,12 @@ export function HeroSection() {
           >
             <motion.a
               href="#contact"
-              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-neural-600 to-quantum-600 text-white font-semibold overflow-hidden w-full sm:w-auto text-center"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold overflow-hidden w-full sm:w-auto text-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-quantum-600 to-neural-600"
+                className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600"
                 initial={{ x: "100%" }}
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
@@ -213,7 +187,7 @@ export function HeroSection() {
               href="/Dev_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full glass-strong font-semibold hover:bg-white/10 transition-colors w-full sm:w-auto text-center text-sm sm:text-base md:text-lg"
+              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full glass-strong font-semibold hover:bg-blue-900/20 hover:text-white border border-white/5 transition-colors w-full sm:w-auto text-center text-sm sm:text-base md:text-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -237,7 +211,7 @@ export function HeroSection() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors group"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-blue-900/20 hover:text-white border border-white/5 transition-colors group"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
                 initial={{ opacity: 0, y: 20 }}

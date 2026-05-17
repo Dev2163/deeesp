@@ -1,9 +1,10 @@
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef, useState } from "react"
+import { Sparkles, Globe, Smartphone, Rocket, Search } from "lucide-react"
 
 export function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: false, amount: 0.2 })
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
   const [filter, setFilter] = useState("All")
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)
 
@@ -110,9 +111,9 @@ export function ProjectsSection() {
   ]
 
   const categories = [
-    { name: "All", icon: "✨", count: projects.length },
-    { name: "Web", icon: "🌐", count: projects.filter(p => p.category === "Web").length },
-    { name: "Mobile", icon: "📱", count: projects.filter(p => p.category === "Mobile").length },
+    { name: "All", icon: <Sparkles className="w-4 h-4" />, count: projects.length },
+    { name: "Web", icon: <Globe className="w-4 h-4" />, count: projects.filter(p => p.category === "Web").length },
+    { name: "Mobile", icon: <Smartphone className="w-4 h-4" />, count: projects.filter(p => p.category === "Mobile").length },
   ]
 
   const filteredProjects = filter === "All"
@@ -127,7 +128,7 @@ export function ProjectsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 flex flex-col items-center"
         >
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
@@ -135,14 +136,14 @@ export function ProjectsSection() {
             transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
             className="inline-block mb-4"
           >
-            <span className="text-6xl">🚀</span>
+            <Rocket className="w-16 h-16 text-blue-400" />
           </motion.div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
             <span className="text-gradient-cosmic cosmic-glow">
               My Projects
             </span>
           </h2>
-          <p className="text-lg sm:text-xl text-purple-300 max-w-3xl mx-auto mb-8 px-4">
+          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto mb-8 px-4">
             Here are some of the projects I've worked on during my learning journey as a fresher developer.
           </p>
         </motion.div>
@@ -159,10 +160,10 @@ export function ProjectsSection() {
               key={category.name}
               onClick={() => setFilter(category.name)}
               className={`
-                relative px-8 py-4 rounded-full font-semibold transition-all duration-300
+                relative px-6 py-3 rounded-full font-semibold transition-all duration-300
                 ${filter === category.name
-                  ? 'bg-gradient-to-r from-yellow-500 via-purple-500 to-blue-500 text-white shadow-glow'
-                  : 'glass-strong hover:bg-purple-500/10 border border-purple-500/20'
+                  ? 'bg-gradient-to-r from-white to-blue-500 text-slate-950 shadow-glow'
+                  : 'glass-strong hover:bg-blue-900/20 border border-white/5 text-slate-300 hover:text-white'
                 }
               `}
               whileHover={{ scale: 1.05 }}
@@ -172,9 +173,9 @@ export function ProjectsSection() {
               transition={{ delay: 0.3 + i * 0.1 }}
             >
               <span className="flex items-center gap-2">
-                <span className="text-xl">{category.icon}</span>
+                {category.icon}
                 {category.name}
-                <span className="ml-1 px-2 py-0.5 rounded-full bg-white/20 text-xs">
+                <span className="ml-1 px-2 py-0.5 rounded-full bg-slate-900/30 text-xs">
                   {category.count}
                 </span>
               </span>
@@ -182,7 +183,7 @@ export function ProjectsSection() {
               {filter === category.name && (
                 <motion.div
                   layoutId="activeFilter"
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-500 via-purple-500 to-blue-500 -z-10"
+                  className="absolute inset-0 rounded-full bg-gradient-to-r from-white to-blue-500 -z-10"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
@@ -193,16 +194,16 @@ export function ProjectsSection() {
         {/* Projects Grid */}
         <motion.div
           layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, i) => (
               <motion.div
                 key={project.title}
                 layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
                 transition={{
                   duration: 0.5,
                   delay: i * 0.1,
@@ -212,7 +213,7 @@ export function ProjectsSection() {
                 onMouseLeave={() => setHoveredProject(null)}
                 className="group relative"
               >
-                <div className="relative h-full rounded-3xl overflow-hidden glass-strong shadow-void hover:shadow-glow transition-all duration-500 border border-purple-500/20">
+                <div className="relative h-full rounded-3xl overflow-hidden glass-strong shadow-void hover:shadow-glow transition-all duration-500 border border-white/5">
                   {/* Project Image */}
                   <div className="relative h-64 overflow-hidden">
                     <motion.img
@@ -220,14 +221,14 @@ export function ProjectsSection() {
                       alt={project.title}
                       className="w-full h-full object-cover"
                       animate={{
-                        scale: hoveredProject === i ? 1.1 : 1,
+                        scale: hoveredProject === i ? 1.05 : 1,
                       }}
-                      transition={{ duration: 0.6 }}
+                      transition={{ duration: 0.4 }}
                     />
 
                     {/* Gradient Overlay */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-blue-400/5 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     />
 
                     {/* Category Badge */}
@@ -236,9 +237,10 @@ export function ProjectsSection() {
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.3 + i * 0.1, type: "spring" }}
-                        className="px-4 py-2 rounded-full glass-strong backdrop-blur-xl text-sm font-semibold border border-purple-500/30"
+                        className="px-4 py-2 rounded-full glass-strong backdrop-blur-xl text-sm font-semibold border border-white/10 flex items-center gap-1.5"
                       >
-                        {project.category === "Web" ? "🌐" : "📱"} {project.category}
+                        {project.category === "Web" ? <Globe className="w-4 h-4 text-blue-400" /> : <Smartphone className="w-4 h-4 text-blue-400" />}
+                        <span className="text-slate-200">{project.category}</span>
                       </motion.div>
                     </div>
 
@@ -257,7 +259,7 @@ export function ProjectsSection() {
                           href={project.sourceCode}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 px-4 py-2 rounded-xl glass-strong backdrop-blur-xl text-center font-semibold hover:bg-purple-500/20 transition-colors border border-purple-500/30"
+                          className="flex-1 px-4 py-2 rounded-xl glass-strong backdrop-blur-xl text-center font-semibold hover:bg-blue-900/40 hover:text-white transition-colors border border-white/10 text-sm text-slate-300"
                         >
                           <span className="flex items-center justify-center gap-2">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -272,7 +274,7 @@ export function ProjectsSection() {
                           href={project.liveDemo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-500 via-purple-500 to-blue-500 text-white text-center font-semibold hover:shadow-glow transition-shadow"
+                          className="flex-1 px-4 py-2 rounded-xl bg-gradient-to-r from-white to-blue-500 text-slate-950 font-bold hover:shadow-glow transition-shadow text-sm"
                         >
                           <span className="flex items-center justify-center gap-2">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -288,15 +290,15 @@ export function ProjectsSection() {
                   {/* Project Info */}
                   <div className="p-6">
                     <motion.h3
-                      className="font-display text-2xl mb-1 text-gradient-golden cosmic-glow transition-all"
+                      className="font-display text-2xl mb-1 text-gradient-cosmic transition-all"
                       animate={{
                         x: hoveredProject === i ? 5 : 0
                       }}
                     >
                       {project.title}
                     </motion.h3>
-                    <p className="text-sm text-purple-300 mb-3">{project.subtitle}</p>
-                    <p className="text-purple-200/80 mb-4 line-clamp-2">
+                    <p className="text-sm text-blue-400 mb-3">{project.subtitle}</p>
+                    <p className="text-slate-300 mb-4 line-clamp-2">
                       {project.description}
                     </p>
 
@@ -308,7 +310,7 @@ export function ProjectsSection() {
                           initial={{ opacity: 0, scale: 0 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.4 + i * 0.1 + techIndex * 0.05 }}
-                          className="px-3 py-1 rounded-lg glass text-xs font-medium border border-purple-500/30 text-purple-200"
+                          className="px-3 py-1 rounded-lg glass text-xs font-medium border border-white/5 text-slate-300"
                         >
                           {tech}
                         </motion.span>
@@ -318,7 +320,7 @@ export function ProjectsSection() {
 
                   {/* Decorative gradient border */}
                   <motion.div
-                    className="absolute inset-0 rounded-3xl bg-gradient-to-br from-yellow-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 -z-10 blur-xl transition-opacity duration-500"
+                    className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 via-blue-400/5 to-white/5 opacity-0 group-hover:opacity-100 -z-10 blur-xl transition-opacity duration-500"
                   />
                 </div>
               </motion.div>
@@ -331,10 +333,10 @@ export function ProjectsSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-20"
+            className="text-center py-20 flex flex-col items-center justify-center"
           >
-            <span className="text-6xl mb-4 block">🔍</span>
-            <p className="text-xl text-purple-300">No projects found in this category</p>
+            <Search className="w-16 h-16 text-slate-400 mb-4" />
+            <p className="text-xl text-slate-500">No projects found in this category</p>
           </motion.div>
         )}
       </div>

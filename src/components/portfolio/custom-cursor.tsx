@@ -28,11 +28,6 @@ export function CustomCursor() {
         checkMobile()
     }, [])
 
-    // Don't render custom cursor on mobile
-    if (isMobile) {
-        return null
-    }
-
     useEffect(() => {
         const moveCursor = (e: MouseEvent) => {
             cursorX.set(e.clientX)
@@ -85,6 +80,11 @@ export function CustomCursor() {
         }
     }, [cursorX, cursorY])
 
+    // Don't render custom cursor on mobile
+    if (isMobile) {
+        return null
+    }
+
     return (
         <>
             {/* Hide default cursor */}
@@ -98,7 +98,7 @@ export function CustomCursor() {
             {trail.map((point, index) => (
                 <motion.div
                     key={point.id}
-                    className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full bg-gradient-to-r from-neural-500 to-quantum-500"
+                    className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
                     style={{
                         x: point.x - 2,
                         y: point.y - 2,
@@ -127,17 +127,17 @@ export function CustomCursor() {
             >
                 {/* Outer ring */}
                 <motion.div
-                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-neural-500"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-500"
                     animate={{
                         width: isHovering ? 40 : 32,
                         height: isHovering ? 40 : 32,
-                        borderColor: isHovering ? "rgb(168, 85, 247)" : "rgb(71, 133, 255)",
+                        borderColor: isHovering ? "rgb(255, 255, 255)" : "rgb(59, 130, 246)",
                     }}
                     transition={{ duration: 0.2 }}
                 >
                     {/* Pulsing effect */}
                     <motion.div
-                        className="absolute inset-0 rounded-full bg-neural-500/20"
+                        className="absolute inset-0 rounded-full bg-blue-500/20"
                         animate={{
                             scale: [1, 1.3, 1],
                             opacity: [0.5, 0, 0.5],
@@ -151,7 +151,7 @@ export function CustomCursor() {
 
                 {/* Inner dot */}
                 <motion.div
-                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-neural-500 to-quantum-500"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
                     animate={{
                         width: isHovering ? 8 : 6,
                         height: isHovering ? 8 : 6,
@@ -159,7 +159,7 @@ export function CustomCursor() {
                     transition={{ duration: 0.2 }}
                 >
                     {/* Glow effect */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-neural-400 to-quantum-400 blur-sm opacity-70" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-300 blur-sm opacity-70" />
                 </motion.div>
             </motion.div>
 
@@ -187,7 +187,7 @@ export function CustomCursor() {
                                     duration: 0.6,
                                     delay: i * 0.05,
                                 }}
-                            >
+                              >
                                 <svg width="100" height="100" viewBox="0 0 100 100" className="-translate-x-1/2 -translate-y-1/2">
                                     <motion.path
                                         d="M50 10 L55 45 L70 45 L45 90 L50 55 L30 55 Z"
@@ -198,8 +198,8 @@ export function CustomCursor() {
                                     />
                                     <defs>
                                         <linearGradient id="thunder-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" stopColor="rgb(71, 133, 255)" stopOpacity="0.8" />
-                                            <stop offset="100%" stopColor="rgb(168, 85, 247)" stopOpacity="0.8" />
+                                            <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.8" />
+                                            <stop offset="100%" stopColor="rgb(255, 255, 255)" stopOpacity="0.8" />
                                         </linearGradient>
                                     </defs>
                                 </svg>
@@ -208,7 +208,7 @@ export function CustomCursor() {
 
                         {/* Expanding ring */}
                         <motion.div
-                            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-neural-500"
+                            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-500"
                             style={{
                                 left: effect.x,
                                 top: effect.y,
@@ -229,7 +229,7 @@ export function CustomCursor() {
                             return (
                                 <motion.div
                                     key={i}
-                                    className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-neural-500 to-quantum-500"
+                                    className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
                                     style={{
                                         left: effect.x,
                                         top: effect.y,
@@ -248,7 +248,7 @@ export function CustomCursor() {
 
                         {/* Flash effect */}
                         <motion.div
-                            className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-neural-500/30 to-quantum-500/30 blur-xl"
+                            className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/30 to-blue-400/30 blur-xl"
                             style={{
                                 left: effect.x - 64,
                                 top: effect.y - 64,

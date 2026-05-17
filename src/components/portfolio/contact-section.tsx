@@ -1,14 +1,15 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
+import { Mail, Smartphone, MapPin, MessageSquare, Rocket, Heart } from "lucide-react"
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: false, amount: 0.3 })
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
   const [hoveredContact, setHoveredContact] = useState<number | null>(null)
 
   const contactInfo = [
     {
-      icon: "📧",
+      icon: <Mail className="w-8 h-8 text-white" />,
       label: "Email",
       value: "devsp2106@gmail.com",
       href: "mailto:devsp2106@gmail.com",
@@ -16,7 +17,7 @@ export function ContactSection() {
       description: "Drop me an email"
     },
     {
-      icon: "📱",
+      icon: <Smartphone className="w-8 h-8 text-white" />,
       label: "Phone",
       value: "+91-7016686728",
       href: "tel:+917016686728",
@@ -24,7 +25,7 @@ export function ContactSection() {
       description: "Give me a call"
     },
     {
-      icon: "📍",
+      icon: <MapPin className="w-8 h-8 text-white" />,
       label: "Location",
       value: "Gujarat, India",
       href: "#",
@@ -67,7 +68,7 @@ export function ContactSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-20 flex flex-col items-center"
         >
           <motion.div
             initial={{ scale: 0, rotate: 180 }}
@@ -75,7 +76,7 @@ export function ContactSection() {
             transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
             className="inline-block mb-4"
           >
-            <span className="text-6xl">💬</span>
+            <MessageSquare className="w-16 h-16 text-blue-400" />
           </motion.div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
             <span className="text-gradient-quantum">
@@ -94,7 +95,7 @@ export function ContactSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ delay: 0.2 }}
-            className="mb-12 p-8 rounded-3xl glass-strong shadow-neural"
+            className="mb-12 p-8 rounded-3xl glass-strong shadow-neural border border-white/5"
           >
             <div className="text-center">
               <h3 className="font-display text-3xl mb-4">Get In Touch</h3>
@@ -107,7 +108,7 @@ export function ContactSection() {
           </motion.div>
 
           {/* Contact Cards */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-12">
             {contactInfo.map((info, i) => (
               <motion.a
                 key={info.label}
@@ -119,7 +120,7 @@ export function ContactSection() {
                 onMouseLeave={() => setHoveredContact(null)}
                 className="group relative block"
               >
-                <div className="relative h-full p-6 rounded-2xl glass-strong shadow-void hover:shadow-glow transition-all duration-500 overflow-hidden">
+                <div className="relative h-full p-6 rounded-2xl glass-strong shadow-void hover:shadow-glow transition-all duration-500 overflow-hidden flex flex-col items-center text-center border border-white/5">
                   {/* Animated background gradient */}
                   <motion.div
                     className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
@@ -128,24 +129,24 @@ export function ContactSection() {
                   {/* Icon */}
                   <motion.div
                     animate={{
-                      scale: hoveredContact === i ? 1.2 : 1,
-                      rotate: hoveredContact === i ? 360 : 0
+                      scale: hoveredContact === i ? 1.1 : 1,
+                      rotate: hoveredContact === i ? 15 : 0
                     }}
-                    transition={{ duration: 0.6 }}
-                    className="text-5xl mb-4"
+                    transition={{ duration: 0.4 }}
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${info.gradient} flex items-center justify-center mb-4 shadow-lg`}
                   >
                     {info.icon}
                   </motion.div>
 
                   {/* Label */}
                   <h4 className="font-semibold text-lg mb-1">{info.label}</h4>
-                  <p className="text-sm text-muted-foreground mb-2">{info.description}</p>
+                  <p className="text-sm text-muted-foreground mb-4">{info.description}</p>
 
                   {/* Value */}
                   <motion.p
-                    className="font-mono text-sm group-hover:text-gradient-neural transition-all"
+                    className="font-mono text-sm text-slate-200 group-hover:text-blue-400 transition-all break-all"
                     animate={{
-                      x: hoveredContact === i ? 5 : 0
+                      y: hoveredContact === i ? -2 : 0
                     }}
                   >
                     {info.value}
@@ -211,16 +212,16 @@ export function ContactSection() {
             />
 
             {/* Content */}
-            <div className="relative z-10 text-center text-white">
+            <div className="relative z-10 text-center text-white flex flex-col items-center">
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="text-5xl mb-4"
+                className="mb-4"
               >
-                🚀
+                <Rocket className="w-12 h-12 text-blue-400" />
               </motion.div>
               <h4 className="font-display text-2xl mb-2">Ready to Start!</h4>
-              <p className="opacity-90">
+              <p className="opacity-90 max-w-xl">
                 As a fresher, I'm excited to bring fresh ideas and energy to your team or project.
               </p>
             </div>
@@ -231,7 +232,7 @@ export function ContactSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ delay: 1 }}
-            className="mt-12 p-8 rounded-3xl glass-strong shadow-quantum text-center"
+            className="mt-12 p-8 rounded-3xl glass-strong shadow-quantum text-center flex flex-col items-center"
           >
             <motion.div
               animate={{
@@ -239,9 +240,9 @@ export function ContactSection() {
                 rotate: [0, 5, -5, 0]
               }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="text-5xl mb-4"
+              className="mb-4"
             >
-              ❤️
+              <Heart className="w-12 h-12 text-red-500 fill-red-500" />
             </motion.div>
             <h3 className="font-display text-2xl mb-3">Thank You for Visiting!</h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -254,7 +255,7 @@ export function ContactSection() {
 
       {/* Decorative elements */}
       <motion.div
-        className="absolute top-20 left-20 w-64 h-64 rounded-full bg-gradient-to-br from-neural-500/10 to-quantum-500/10 blur-3xl"
+        className="absolute top-20 left-20 w-64 h-64 rounded-full bg-gradient-to-br from-neural-500/10 to-quantum-500/10 blur-3xl pointer-events-none"
         animate={{
           scale: [1, 1.3, 1],
           x: [0, -30, 0],
@@ -263,7 +264,7 @@ export function ContactSection() {
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-20 right-20 w-64 h-64 rounded-full bg-gradient-to-br from-quantum-500/10 to-photon-500/10 blur-3xl"
+        className="absolute bottom-20 right-20 w-64 h-64 rounded-full bg-gradient-to-br from-quantum-500/10 to-photon-500/10 blur-3xl pointer-events-none"
         animate={{
           scale: [1.3, 1, 1.3],
           x: [0, 30, 0],

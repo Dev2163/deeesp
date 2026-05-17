@@ -7,7 +7,7 @@ git branch
 git add .
 
 # Commit the changes with a message
-git commit -m "mobile phone ui"
+git commit -m "portfolio update"
 
 # Push changes to GitHub master branch
 git push origin master

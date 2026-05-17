@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { Mail, Smartphone, MapPin, Heart } from "lucide-react"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -116,20 +117,20 @@ export function Footer() {
             >
               <h4 className="font-semibold text-lg mb-4">Get In Touch</h4>
               <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <span>📧</span>
+                <li className="flex items-center gap-2.5">
+                  <Mail className="w-4 h-4 text-blue-400" />
                   <a href="mailto:devsp2106@gmail.com" className="hover:text-neural-500 dark:hover:text-neural-400 transition-colors">
                     devsp2106@gmail.com
                   </a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span>📱</span>
+                <li className="flex items-center gap-2.5">
+                  <Smartphone className="w-4 h-4 text-blue-400" />
                   <a href="tel:+917016686728" className="hover:text-neural-500 dark:hover:text-neural-400 transition-colors">
                     +91-7016686728
                   </a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span>📍</span>
+                <li className="flex items-center gap-2.5">
+                  <MapPin className="w-4 h-4 text-blue-400" />
                   <span>Gujarat, India</span>
                 </li>
               </ul>
@@ -153,14 +154,14 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground"
           >
-            <p>
+            <p className="flex items-center gap-1.5">
               © {currentYear} Dev Suthar. Crafted with{" "}
               <motion.span
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
-                className="inline-block text-red-500"
+                className="inline-block"
               >
-                ❤️
+                <Heart className="w-4 h-4 text-red-500 fill-red-500 inline" />
               </motion.span>{" "}
               and code
             </p>
@@ -170,7 +171,7 @@ export function Footer() {
 
       {/* Decorative gradient */}
       <motion.div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-gradient-to-t from-neural-500/10 to-transparent blur-3xl"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-gradient-to-t from-neural-500/10 to-transparent blur-3xl pointer-events-none"
         animate={{ opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 4, repeat: Infinity }}
       />
