@@ -3,7 +3,6 @@ import promoVideo from "/images/WhoWear_custom_tshirt_promo.mp4"
 import codingVideo from "/images/video.mp4"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Play, Video } from "lucide-react"
 
 export function VideoSection() {
   return (

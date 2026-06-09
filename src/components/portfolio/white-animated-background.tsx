@@ -5,7 +5,7 @@ export function WhiteAnimatedBackground() {
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#090a0f]">
       {/* Soft floating white & royal blue blur circles */}
       <motion.div
-        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-900/10 blur-[120px]"
+        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#ffb703]/10 blur-[120px]"
         animate={{
           x: [0, 80, -40, 0],
           y: [0, -60, 50, 0],
@@ -31,7 +31,7 @@ export function WhiteAnimatedBackground() {
         }}
       />
       <motion.div
-        className="absolute top-[30%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-blue-500/5 blur-[100px]"
+        className="absolute top-[30%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-[#ffb703]/5 blur-[100px]"
         animate={{
           x: [0, 50, -80, 0],
           y: [0, 100, -50, 0],

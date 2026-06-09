@@ -1,13 +1,12 @@
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { GraduationCap, BookOpen, Calendar, Sparkles } from "lucide-react"
+import { useRef, useState, useEffect } from "react"
 
 export function EducationTimeline() {
     const sectionRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
     const [activeStep, setActiveStep] = useState(0)
 
-    const educationSteps = [
+    const timelineSteps = [
         {
             id: 1,
             degree: "Bachelor of Science in IT",
@@ -16,8 +15,7 @@ export function EducationTimeline() {
             institution: "University of Gujarat",
             cgpa: "7.43",
             description: "Gained a solid foundation in software development, data structures, and modern web applications.",
-            icon: <BookOpen className="w-8 h-8 text-blue-400" />,
-            color: "from-blue-600 to-blue-400",
+            color: "from-blue-600 to-[#ffb703]",
             current: false
         },
         {
@@ -28,281 +26,275 @@ export function EducationTimeline() {
             institution: "University of Gujarat",
             cgpa: "7.08",
             description: "Strengthening technical depth and specializing in mobile application engineering and advanced server architectures.",
-            icon: <GraduationCap className="w-8 h-8 text-blue-400" />,
-            color: "from-blue-500 to-blue-300",
+            color: "from-[#ffb703] to-[#ffb703]/80",
+            current: false
+        },
+        {
+            id: 3,
+            degree: "Android Developer Intern",
+            shortName: "CodFleet, Ahmedabad",
+            period: "January 2024 – Present",
+            institution: "CodFleet",
+            cgpa: "",
+            description: "Designed and engineered responsive UI/UX architectures for cross-platform Android & iOS apps using React Native, while implementing clean state management to eliminate performance bottlenecks. Integrated continuous RESTful APIs with secure asynchronous connection layers and assisted in backend service optimization by developing functional API endpoints. Conducted rigorous UI-side component testing using real-time dynamic data and managed end-to-end multi-platform app deployment preparation pipelines for production environments.",
+            color: "from-[#ffb703] to-[#ffb703]/80",
             current: true
         }
     ]
+
 
     return (
         <section
             ref={sectionRef}
             id="education"
-            className="relative py-32 overflow-hidden noise-overlay"
+            className="relative py-24 overflow-clip noise-overlay bg-white dark:bg-[#050505] transition-colors duration-500"
         >
-            <div className="container mx-auto px-4 relative z-10">
+            <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-24 flex flex-col items-center"
+                    className="text-center mb-16 lg:mb-24 flex flex-col items-center"
                 >
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        animate={isInView ? { scale: 1 } : { scale: 0 }}
-                        transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
-                        className="inline-block mb-4"
-                    >
-                        <GraduationCap className="w-16 h-16 text-blue-400" />
-                    </motion.div>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 px-4 text-slate-900 dark:text-white transition-colors duration-500">
                         <span className="text-gradient-cosmic cosmic-glow">
-                            My Journey
+                            Experience & Education
                         </span>
                     </h2>
-                    <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto px-4">
-                        A detailed timeline of my academic milestones and technological progression
+                    <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto px-4 transition-colors duration-500">
+                        A detailed timeline of my professional experience and academic milestones
                     </p>
                 </motion.div>
 
-                {/* Symmetrical Timeline Road Container */}
-                <div className="relative max-w-6xl mx-auto">
-                    {/* Symmetrical Central Laser Axis (Hidden on Mobile) */}
-                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-1/2 bg-gradient-to-b from-blue-600/10 via-blue-400 to-blue-600/10 shadow-[0_0_10px_rgba(59,130,246,0.3)] z-0" />
+                <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16 lg:gap-8">
 
-                    {/* Simple vertical timeline line for mobile */}
-                    <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/20 via-blue-400/10 to-blue-500/20 block md:hidden" />
+                    {/* Left Side - 3D Sphere Graphic */}
+                    <div
+                        className="w-full lg:w-1/2 flex items-center justify-center h-[350px] lg:h-[600px] lg:sticky lg:top-32 mt-10 lg:mt-0"
+                        style={{ perspective: '1000px' }}
+                    >
+                        <motion.div
+                            className="relative w-[300px] h-[300px] flex items-center justify-center"
+                            style={{ transformStyle: 'preserve-3d' }}
+                            animate={{
+                                rotateX: [0, 360],
+                                rotateY: [0, 360]
+                            }}
+                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                        >
+                            {/* Inner cosmic glow */}
+                            <div className="absolute top-1/2 left-1/2 w-[150px] h-[150px] -mt-[75px] -ml-[75px] bg-[#ffb703]/20 blur-[50px] rounded-full pointer-events-none" />
 
-                    {/* Education Steps */}
-                    <div className="relative space-y-16 md:space-y-36 pt-4">
-                        {educationSteps.map((step, index) => (
-                          <div 
-                            key={step.id}
-                            className="relative w-full flex flex-col md:flex-row items-center"
-                          >
-                            {/* Desktop Symmetrical Node & Year Capsule */}
-                            <div className="absolute left-4 md:left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center">
-                              <motion.div
-                                className={`w-14 h-14 rounded-2xl bg-slate-950 border-2 ${activeStep === index ? 'border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.6)]' : 'border-white/10'} flex items-center justify-center transition-all duration-300`}
-                                animate={{
-                                    scale: activeStep === index ? 1.15 : 1,
-                                    rotate: activeStep === index ? [0, 5, -5, 0] : 0
-                                }}
-                                transition={{ duration: 0.5 }}
-                              >
-                                {step.icon}
-                              </motion.div>
-                              {/* Year badge */}
-                              <div className="mt-3 px-3 py-1 rounded-full bg-blue-950/80 border border-blue-500/30 backdrop-blur-md text-[10px] font-bold text-blue-300 uppercase tracking-widest whitespace-nowrap shadow-md">
-                                  {step.period}
-                              </div>
-                            </div>
-
-                            {/* timeline card item */}
-                            <motion.div
-                                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                                transition={{ duration: 0.7, delay: index * 0.2, ease: "easeOut" }}
-                                onMouseEnter={() => setActiveStep(index)}
-                                className={`relative w-full md:w-[calc(50%-48px)] pl-10 md:pl-0 ${index % 2 === 0 ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'}`}
-                            >
-                                {/* Glowing Holographic Card */}
-                                <motion.div
-                                    className="relative group"
-                                    whileHover={{ scale: 1.02, y: -5 }}
-                                    transition={{ type: "spring", stiffness: 300 }}
-                                >
-                                    {/* Card Background with Glass Effect */}
-                                    <div className="relative rounded-3xl overflow-hidden glass-strong border border-white/5 shadow-void transition-shadow duration-300">
-                                        {/* Animated Glow Border */}
-                                        <motion.div
-                                            className="absolute inset-0 rounded-3xl pointer-events-none"
-                                            style={{
-                                                background: `linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(96, 165, 250, 0.08))`,
-                                                filter: 'blur(20px)',
-                                                opacity: activeStep === index ? 0.2 : 0.05
-                                            }}
-                                            animate={{
-                                                opacity: activeStep === index ? [0.1, 0.25, 0.1] : 0.05,
-                                                scale: activeStep === index ? [1, 1.02, 1] : 1
-                                            }}
-                                            transition={{ duration: 2, repeat: Infinity }}
-                                        />
-
-                                        {/* Card Content */}
-                                        <div className="relative p-6 md:p-8 z-10 flex flex-col">
-                                            {/* Current Status Flashing Beacon */}
-                                            {step.current && (
-                                                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4 w-fit">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                                                    Current Milestone
-                                                </div>
-                                            )}
-
-                                            {/* Icon and CGPA for Mobile */}
-                                            <div className="flex items-start justify-between mb-4">
-                                                <motion.div
-                                                    className="flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-900/20 border border-blue-500/20"
-                                                    animate={{ scale: activeStep === index ? 1.05 : 1 }}
-                                                    transition={{ duration: 0.5 }}
-                                                >
-                                                    {step.icon}
-                                                </motion.div>
-
-                                                {/* CGPA Badge */}
-                                                <motion.div
-                                                    className="px-4 py-2 rounded-full bg-blue-900/20 border border-blue-500/20 backdrop-blur-sm shadow-sm"
-                                                    whileHover={{ scale: 1.1 }}
-                                                >
-                                                    <span className="text-blue-400 font-bold text-sm">
-                                                        CGPA: {step.cgpa}
-                                                    </span>
-                                                </motion.div>
-                                            </div>
-
-                                            {/* Degree Title */}
-                                            <h3 className="text-2xl md:text-3xl font-display font-bold mb-2 text-gradient-cosmic">
-                                                {step.degree}
-                                            </h3>
-
-                                            {/* Short Name */}
-                                            <p className="text-lg text-blue-400 font-semibold mb-3">
-                                                ({step.shortName})
-                                            </p>
-
-                                            {/* Period (Shown inside card for mobile readability) */}
-                                            <motion.p
-                                                className="text-slate-400 font-medium mb-4 flex items-center gap-2 md:hidden"
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ delay: 0.5 }}
-                                            >
-                                                <Calendar className="w-5 h-5 text-slate-400" />
-                                                {step.period}
-                                            </motion.p>
-
-                                            {/* Description */}
-                                            <p className="text-slate-300 leading-relaxed text-sm md:text-base">
-                                                {step.description}
-                                            </p>
-
-                                            {/* Decorative Stars */}
-                                            <div className="absolute top-4 right-4 flex gap-1">
-                                                {[...Array(3)].map((_, i) => (
-                                                    <motion.div
-                                                        key={i}
-                                                        animate={{
-                                                            opacity: [0.3, 1, 0.3],
-                                                            scale: [0.8, 1.2, 0.8]
-                                                        }}
-                                                        transition={{
-                                                            duration: 2,
-                                                            delay: i * 0.3,
-                                                            repeat: Infinity
-                                                        }}
-                                                    >
-                                                        <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                                                    </motion.div>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        {/* Holographic Shine Effect */}
-                                        <motion.div
-                                            className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent pointer-events-none"
-                                            animate={{
-                                                x: ['-100%', '100%']
-                                            }}
-                                            transition={{
-                                                duration: 3,
-                                                repeat: Infinity,
-                                                repeatDelay: 2
-                                            }}
-                                            style={{ transform: 'skewX(-20deg)' }}
-                                        />
-                                    </div>
-
-                                    {/* Floating Particles around card */}
-                                    {activeStep === index && (
-                                        <>
-                                            {[...Array(6)].map((_, i) => (
-                                                <motion.div
-                                                    key={i}
-                                                    className="absolute w-1.5 h-1.5 bg-blue-400 rounded-full"
-                                                    style={{
-                                                        top: `${Math.random() * 100}%`,
-                                                        left: `${Math.random() * 100}%`,
-                                                    }}
-                                                    animate={{
-                                                        y: [-20, -40, -20],
-                                                        opacity: [0, 1, 0],
-                                                        scale: [0, 1.5, 0]
-                                                    }}
-                                                    transition={{
-                                                        duration: 2,
-                                                        delay: i * 0.2,
-                                                        repeat: Infinity
-                                                    }}
-                                                />
-                                            ))}
-                                        </>
-                                    )}
-                                </motion.div>
-
-                                {/* Connection Line to Center Axis (Hidden on Mobile) */}
-                                <motion.div
-                                    className={`absolute top-1/2 w-12 h-0.5 bg-gradient-to-r ${index % 2 === 0 ? 'from-blue-400 to-transparent' : 'from-transparent to-blue-400'} hidden md:block`}
-                                    style={{
-                                        [index % 2 === 0 ? 'right' : 'left']: '-48px',
-                                        transformOrigin: index % 2 === 0 ? 'left' : 'right'
-                                    }}
-                                    initial={{ scaleX: 0, opacity: 0 }}
-                                    animate={isInView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.8 + index * 0.4 }}
-                                />
-                            </motion.div>
-                          </div>
-                        ))}
+                            {/* Core Sphere */}
+                            <div className="absolute top-1/2 left-1/2 w-24 h-24 -mt-12 -ml-12 rounded-full bg-gradient-to-br from-[#ffb703] to-[#e85d04] opacity-80 blur-[2px] shadow-[0_0_30px_rgba(255,183,3,0.6)]" />
+                            
+                            {/* 3D Rings forming a sphere (Longitude) */}
+                            {Array.from({ length: 12 }).map((_, i) => {
+                                const rotateY = i * (180 / 12);
+                                return (
+                                    <motion.div
+                                        key={`long-${i}`}
+                                        className="absolute inset-0 rounded-full border-[1px]"
+                                        style={{
+                                            transform: `rotateY(${rotateY}deg)`,
+                                            transformStyle: 'preserve-3d',
+                                            borderColor: i % 3 === 0 ? 'rgba(255, 183, 3, 0.5)' : 'rgba(148, 163, 184, 0.2)',
+                                            boxShadow: i % 3 === 0 ? '0 0 15px rgba(255, 183, 3, 0.2) inset' : 'none',
+                                        }}
+                                    />
+                                );
+                            })}
+                            
+                            {/* 3D Rings forming a sphere (Latitude/Diagonal) */}
+                            {Array.from({ length: 12 }).map((_, i) => {
+                                const rotateX = 90;
+                                const rotateY = i * (180 / 12);
+                                return (
+                                    <motion.div
+                                        key={`lat-${i}`}
+                                        className="absolute inset-0 rounded-full border-[1px]"
+                                        style={{
+                                            transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+                                            transformStyle: 'preserve-3d',
+                                            borderColor: i % 3 === 0 ? 'rgba(255, 183, 3, 0.3)' : 'rgba(148, 163, 184, 0.1)',
+                                        }}
+                                    />
+                                );
+                            })}
+                            
+                            {/* Orbiting Elements */}
+                            {timelineSteps.map((step, i) => {
+                                const isActive = activeStep === i;
+                                const angle = i * (360 / timelineSteps.length);
+                                
+                                return (
+                                    <motion.div
+                                        key={`node-${i}`}
+                                        className="absolute top-1/2 left-1/2 rounded-full"
+                                        style={{
+                                            width: isActive ? 24 : 16,
+                                            height: isActive ? 24 : 16,
+                                            marginTop: isActive ? -12 : -8,
+                                            marginLeft: isActive ? -12 : -8,
+                                            transform: `rotateY(${angle}deg) rotateX(20deg) translateZ(150px)`,
+                                            transformStyle: 'preserve-3d',
+                                        }}
+                                        animate={{
+                                            background: isActive ? '#ffb703' : '#cbd5e1',
+                                            boxShadow: isActive ? '0 0 20px #ffb703' : 'none',
+                                            border: isActive ? 'none' : '2px solid rgba(148, 163, 184, 0.5)',
+                                            scale: isActive ? 1.2 : 1,
+                                        }}
+                                        transition={{ duration: 0.5 }}
+                                    >
+                                        {isActive && (
+                                            <div className="absolute inset-0 bg-white/40 rounded-full blur-[2px]" />
+                                        )}
+                                    </motion.div>
+                                );
+                            })}
+                        </motion.div>
                     </div>
 
-                    {/* Final Burst of Light */}
-                    <motion.div
-                        className="relative mt-24 md:mt-36 text-center pl-10 md:pl-0"
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                        transition={{ duration: 1, delay: 0.8 }}
-                    >
-                        {/* Blue Laser Burst Effect */}
-                        <motion.div
-                            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                            animate={{
-                                scale: [1, 1.3, 1],
-                                opacity: [0.1, 0.2, 0.1]
-                            }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                        >
-                            <div className="w-64 h-64 rounded-full bg-gradient-radial from-blue-500/10 via-blue-500/5 to-transparent blur-2xl" />
-                        </motion.div>
-
-                        {/* Final Text */}
-                        <motion.div
-                            className="relative z-10"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                            transition={{ duration: 1, delay: 1.0 }}
-                        >
-                            <h3 className="text-3xl md:text-5xl font-bold font-display text-gradient-cosmic">
-                                Continuing the Journey
-                            </h3>
-                            <p className="text-lg md:text-xl text-slate-300 mt-4 flex items-center justify-center gap-2">
-                                Building the future, one line of code at a time
-                                <Sparkles className="w-5 h-5 text-blue-400 inline" />
-                            </p>
-                        </motion.div>
-                    </motion.div>
+                    {/* Right Side - Timeline Steps */}
+                    <div className="w-full lg:w-1/2 py-4 px-4 lg:px-0 relative">
+                        <div className="flex flex-col space-y-12 lg:space-y-16 relative">
+                            {timelineSteps.map((step, index) => {
+                                return (
+                                    <TimelineStepItem
+                                        key={step.id}
+                                        step={step}
+                                        index={index}
+                                        activeStep={activeStep}
+                                        setActiveStep={setActiveStep}
+                                        totalSteps={timelineSteps.length}
+                                        globalIsInView={isInView}
+                                    />
+                                )
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+    )
+}
+
+function TimelineStepItem({ step, index, activeStep, setActiveStep, totalSteps, globalIsInView }: any) {
+    const ref = useRef<HTMLDivElement>(null);
+    const isScrollInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
+
+    useEffect(() => {
+        if (isScrollInView) {
+            setActiveStep(index);
+        }
+    }, [isScrollInView, index, setActiveStep]);
+
+    const isActive = activeStep === index;
+    const isPast = index < activeStep;
+
+    return (
+        <div
+            ref={ref}
+            className="relative pl-14 lg:pl-20 cursor-pointer group"
+            onMouseEnter={() => setActiveStep(index)}
+            onClick={() => setActiveStep(index)}
+        >
+            {/* Track Line */}
+            {index < totalSteps - 1 && (
+                <>
+                    <div
+                        className="absolute left-[27px] top-[28px] w-[2px] bg-slate-200 dark:bg-slate-800/80 z-0 hidden sm:block transition-colors duration-500"
+                        style={{ height: 'calc(100% + 64px)' }}
+                    />
+                    <div
+                        className="absolute left-[27px] top-[28px] w-[2px] bg-slate-200 dark:bg-slate-800/80 z-0 block sm:hidden transition-colors duration-500"
+                        style={{ height: 'calc(100% + 48px)' }}
+                    />
+                    <motion.div
+                        className="absolute left-[27px] top-[28px] w-[2px] bg-[#ffb703] z-0 origin-top hidden sm:block"
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: activeStep > index ? 1 : 0 }}
+                        transition={{ duration: 0.5 }}
+                        style={{ height: 'calc(100% + 64px)' }}
+                    />
+                    <motion.div
+                        className="absolute left-[27px] top-[28px] w-[2px] bg-[#ffb703] z-0 origin-top block sm:hidden"
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: activeStep > index ? 1 : 0 }}
+                        transition={{ duration: 0.5 }}
+                        style={{ height: 'calc(100% + 48px)' }}
+                    />
+                </>
+            )}
+
+            {/* Dot Container */}
+            <div className="absolute left-0 top-0 w-14 h-14 flex items-center justify-center z-10">
+                <motion.div
+                    className={`w-5 h-5 rounded-full border-[3px] flex items-center justify-center transition-colors duration-300
+                        ${isActive || isPast ? 'border-[#ffb703] bg-white dark:bg-slate-900' : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900'}
+                    `}
+                    animate={{
+                        scale: isActive ? 1.3 : 1,
+                        boxShadow: isActive ? '0 0 15px rgba(255, 183, 3, 0.4)' : 'none'
+                    }}
+                >
+                    {isActive && (
+                        <motion.div
+                            className="w-2 h-2 rounded-full bg-[#ffb703]"
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ type: 'spring' }}
+                        />
+                    )}
+                </motion.div>
+            </div>
+
+            {/* Content */}
+            <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={globalIsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className="flex flex-col pt-[18px]"
+            >
+                <div className="flex items-center gap-3 mb-3">
+                    <span className={`text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? 'text-[#ffb703]' : 'text-slate-500 group-hover:text-slate-400'}`}>
+                        Step 0{index + 1}
+                    </span>
+                    {step.current && (
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#ffb703]/10 text-[#ffb703] border border-[#ffb703]/20">
+                            CURRENT
+                        </span>
+                    )}
+                </div>
+
+                <h3 className={`text-2xl lg:text-3xl font-bold mb-2 transition-colors duration-300 ${isActive ? 'text-slate-900 dark:text-white' : 'text-slate-600 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white'}`}>
+                    {step.degree}
+                </h3>
+
+                <div className="flex flex-wrap gap-2 text-slate-600 dark:text-slate-400 font-medium text-base mb-4 transition-colors duration-500">
+                    <span className={isActive ? 'text-[#fb8500] dark:text-[#ffb703]' : ''}>{step.institution}</span>
+                    <span className="hidden sm:inline">•</span>
+                    <span className="block sm:inline w-full sm:w-auto">{step.period}</span>
+                    {step.shortName && (
+                        <>
+                            <span className="hidden sm:inline">•</span>
+                            <span className="block sm:inline w-full sm:w-auto text-slate-500 dark:text-slate-500">{step.shortName}</span>
+                        </>
+                    )}
+                </div>
+
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm lg:text-base transition-colors duration-500">
+                    {step.description}
+                </p>
+
+                {step.cgpa && (
+                    <div className="mt-5 inline-flex w-fit items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm transition-colors duration-500">
+                        <span className="text-[#fb8500] dark:text-[#ffb703] font-bold">CGPA</span> {step.cgpa}
+                    </div>
+                )}
+            </motion.div>
+        </div>
     )
 }

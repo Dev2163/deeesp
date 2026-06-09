@@ -98,7 +98,7 @@ export function CustomCursor() {
             {trail.map((point, index) => (
                 <motion.div
                     key={point.id}
-                    className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
+                    className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full bg-gradient-to-r from-[#ffb703] to-[#ffb703]"
                     style={{
                         x: point.x - 2,
                         y: point.y - 2,
@@ -127,7 +127,7 @@ export function CustomCursor() {
             >
                 {/* Outer ring */}
                 <motion.div
-                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-500"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#ffb703]"
                     animate={{
                         width: isHovering ? 40 : 32,
                         height: isHovering ? 40 : 32,
@@ -137,7 +137,7 @@ export function CustomCursor() {
                 >
                     {/* Pulsing effect */}
                     <motion.div
-                        className="absolute inset-0 rounded-full bg-blue-500/20"
+                        className="absolute inset-0 rounded-full bg-[#ffb703]/20"
                         animate={{
                             scale: [1, 1.3, 1],
                             opacity: [0.5, 0, 0.5],
@@ -151,7 +151,7 @@ export function CustomCursor() {
 
                 {/* Inner dot */}
                 <motion.div
-                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#ffb703] to-[#ffb703]"
                     animate={{
                         width: isHovering ? 8 : 6,
                         height: isHovering ? 8 : 6,
@@ -159,7 +159,7 @@ export function CustomCursor() {
                     transition={{ duration: 0.2 }}
                 >
                     {/* Glow effect */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-300 blur-sm opacity-70" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ffb703] to-[#ffb703]/80 blur-sm opacity-70" />
                 </motion.div>
             </motion.div>
 
@@ -208,7 +208,7 @@ export function CustomCursor() {
 
                         {/* Expanding ring */}
                         <motion.div
-                            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-500"
+                            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#ffb703]"
                             style={{
                                 left: effect.x,
                                 top: effect.y,
@@ -229,7 +229,7 @@ export function CustomCursor() {
                             return (
                                 <motion.div
                                     key={i}
-                                    className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
+                                    className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-[#ffb703] to-[#ffb703]"
                                     style={{
                                         left: effect.x,
                                         top: effect.y,
@@ -248,7 +248,7 @@ export function CustomCursor() {
 
                         {/* Flash effect */}
                         <motion.div
-                            className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/30 to-blue-400/30 blur-xl"
+                            className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-[#ffb703]/30 to-[#ffb703]/30 blur-xl"
                             style={{
                                 left: effect.x - 64,
                                 top: effect.y - 64,

@@ -95,23 +95,31 @@ body {
 /* Premium Hybrid Black, White, and Blue Theme */
 .dark,
 :root {
-    --background: 228 25% 5%; /* Elegant Deep Jet Black HSL */
-    --foreground: 0 0% 100%; /* Pure White HSL */
+    --background: 228 25% 5%;
+    /* Elegant Deep Jet Black HSL */
+    --foreground: 0 0% 100%;
+    /* Pure White HSL */
 
-    --card: 221 39% 11%; /* Dark Charcoal Slate HSL */
-    --card-foreground: 0 0% 100%; /* Pure White HSL */
+    --card: 221 39% 11%;
+    /* Dark Charcoal Slate HSL */
+    --card-foreground: 0 0% 100%;
+    /* Pure White HSL */
 
     --popover: 221 39% 11%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 217 91% 60%; /* Royal Blue #3b82f6 HSL */
+    --primary: 43 100% 51%;
+    /* Gold/Amber HSL */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 213 93% 68%; /* Sky Blue #60a5fa HSL */
+    --secondary: 43 100% 65%;
+    /* Lighter Gold HSL */
     --secondary-foreground: 228 25% 5%;
 
-    --muted: 215 28% 17%; /* Dark Gray HSL */
-    --muted-foreground: 218 11% 65%; /* Slate Gray #9ca3af HSL - High contrast */
+    --muted: 215 28% 17%;
+    /* Dark Gray HSL */
+    --muted-foreground: 218 11% 65%;
+    /* Slate Gray #9ca3af HSL - High contrast */
 
     --accent: 215 28% 17%;
     --accent-foreground: 0 0% 100%;
@@ -119,14 +127,15 @@ body {
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 28% 17%; /* Subtle dark border HSL */
+    --border: 215 28% 17%;
+    /* Subtle dark border HSL */
     --input: 215 28% 17%;
-    --ring: 217 91% 60%;
+    --ring: 43 100% 51%;
 
-    --shadow-neural: 0 4px 20px -2px rgba(59, 130, 246, 0.15);
-    --shadow-quantum: 0 4px 20px -2px rgba(96, 165, 250, 0.15);
+    --shadow-neural: 0 4px 20px -2px rgba(255, 183, 3, 0.15);
+    --shadow-quantum: 0 4px 20px -2px rgba(255, 183, 3, 0.15);
     --shadow-void: 0 4px 20px -4px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 32px -4px rgba(59, 130, 246, 0.35);
+    --shadow-glow: 0 0 32px -4px rgba(255, 183, 3, 0.35);
 }
 
 * {
@@ -159,28 +168,28 @@ body {
 }
 
 .text-gradient-neural {
-    background: linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(96, 165, 250) 100%);
+    background: linear-gradient(135deg, rgb(255, 183, 3) 0%, rgb(255, 214, 102) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .text-gradient-quantum {
-    background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(59, 130, 246) 100%);
+    background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(255, 183, 3) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .text-gradient-photon {
-    background: linear-gradient(135deg, rgb(96, 165, 250) 0%, rgb(255, 255, 255) 100%);
+    background: linear-gradient(135deg, rgb(255, 214, 102) 0%, rgb(255, 255, 255) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .text-gradient-plasma {
-    background: linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(255, 255, 255) 100%);
+    background: linear-gradient(135deg, rgb(255, 183, 3) 0%, rgb(255, 255, 255) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -189,21 +198,21 @@ body {
 
 /* Cosmic theme gradients */
 .text-gradient-cosmic {
-    background: linear-gradient(135deg, #ffffff 0%, #3b82f6 50%, #60a5fa 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #ffb703 50%, #ffd666 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .text-gradient-golden {
-    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    background: linear-gradient(135deg, #ffb703 0%, #ffd666 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .cosmic-glow {
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.4),
+    text-shadow: 0 0 20px rgba(255, 183, 3, 0.4),
         0 0 40px rgba(255, 255, 255, 0.2);
 }
 
@@ -282,11 +291,11 @@ body {
 
     0%,
     100% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6);
+        box-shadow: 0 0 0 0 rgba(255, 183, 3, 0.6);
     }
 
     50% {
-        box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
+        box-shadow: 0 0 0 20px rgba(255, 183, 3, 0);
     }
 }
 
