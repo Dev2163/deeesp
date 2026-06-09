@@ -15,6 +15,24 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "codit",
+    title: "Codit",
+    subtitle: "Food & Logistics Delivery Ecosystem",
+    description: "High-performance, real-time logistics delivery platform with a cross-platform mobile app and a web-based admin control panel.",
+    image: "/images/codit.png",
+    technologies: ["React Native", "Expo", "React.js", "TypeScript", "Firebase"],
+    category: "Mobile",
+    gradient: "from-plasma-500 to-neural-500",
+    detailedDescription: "Built a high-performance, real-time logistics delivery platform featuring a cross-platform mobile application for food ordering and parcel delivery alongside a web-based admin control panel. Integrated Expo Router for file-based routing navigation, LiveKit SDK for dynamic driver communication and Webhooks to handle real-time automated delivery status events. Developed a multi-layer data access architecture — Bloom Filters for membership pre-checks for hot state caching and Firebase for persistence — drastically reducing latency and database bottlenecks.",
+    features: [
+      "Cross-platform mobile app for food and parcel delivery",
+      "Web-based admin control panel",
+      "Real-time automated delivery status events via Webhooks",
+      "Dynamic driver communication with LiveKit SDK",
+      "Multi-layer data access architecture with Bloom Filters"
+    ]
+  },
+  {
     id: "whowear",
     title: "WhoWear",
     subtitle: "Clothing Website",

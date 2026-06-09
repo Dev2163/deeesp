@@ -93,19 +93,7 @@ export function AboutSection() {
                   My unique background as a YouTuber and video editor gives me an edge in UI/UX design—I don't just write code, I craft engaging digital journeys.
                 </p>
               </div>
-              <div className="flex items-center gap-4 mt-4">
-                <div className="flex -space-x-4">
-                  {/* Abstract representations of code commits/activity */}
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className={`w-12 h-12 rounded-full border-2 border-slate-50 dark:border-slate-900 bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center z-[${4-i}]`}>
-                      <Code2 className="w-5 h-5 text-slate-500 dark:text-slate-400" />
-                    </div>
-                  ))}
-                </div>
-                <div className="text-sm text-slate-500 dark:text-slate-400">
-                  <span className="text-slate-900 dark:text-white font-bold block">100+</span> Repositories
-                </div>
-              </div>
+              
             </div>
           </BentoBox>
 

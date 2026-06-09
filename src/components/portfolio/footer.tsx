@@ -32,8 +32,8 @@ export function Footer() {
               transition={{ duration: 0.6 }}
               className="text-5xl md:text-7xl font-bold font-display tracking-tight leading-[1.1] mb-8"
             >
-              Have a Cool Idea?<br />
-              Let's Collaborate<span className="text-[#ffb703]">.</span>
+              કેમ છો પાર્ટી<br />
+              મજામાં<span className="text-[#ffb703]">?</span>
             </motion.h2>
             
             <motion.a 
