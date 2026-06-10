@@ -21,32 +21,6 @@ Welcome to the source code of my personal developer portfolio! This project is a
 - **Routing**: React Router DOM
 - **Icons**: Lucide React & Devicon
 
-## 🚀 Getting Started
-
-Follow these instructions to set up the project locally.
-
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Dev2163/devpot.git
-   cd devpot
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-4. **Start the Development Server:**
-   ```bash
-   npm run dev
-   ```
-   The application will be available at [deeesp.vercel.app](https://deeesp.vercel.app).
 
 ## 📂 Project Structure
 
