@@ -1,6 +1,7 @@
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useTheme } from "@/components/theme-provider"
+import { useNavigate, useLocation } from "react-router-dom"
 
 export function Header() {
     const [activeSection, setActiveSection] = useState("home")
@@ -10,6 +11,8 @@ export function Header() {
     const { theme, setTheme } = useTheme()
     const lastScrollY = useRef(0)
     const { scrollY } = useScroll()
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const navItems = [
         { id: "home", label: "Home" },
@@ -30,29 +33,49 @@ export function Header() {
         }
         lastScrollY.current = latest
 
-        const sections = navItems.map(item => item.id)
-        for (let i = sections.length - 1; i >= 0; i--) {
-            const section = sections[i]
-            const element = document.getElementById(section)
-            if (element) {
-                const rect = element.getBoundingClientRect()
-                if (rect.top <= window.innerHeight / 2) {
-                    setActiveSection(section)
-                    break
+        if (location.pathname === "/") {
+            const sections = navItems.map(item => item.id)
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i]
+                const element = document.getElementById(section)
+                if (element) {
+                    const rect = element.getBoundingClientRect()
+                    if (rect.top <= window.innerHeight / 2) {
+                        setActiveSection(section)
+                        break
+                    }
                 }
             }
         }
     })
 
+    // Handle hash navigation after page load
+    useEffect(() => {
+        if (location.pathname === "/" && location.hash) {
+            const id = location.hash.replace("#", "")
+            setTimeout(() => {
+                const element = document.getElementById(id)
+                if (element) {
+                    element.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
+            }, 100)
+        }
+    }, [location])
+
     const scrollToSection = (id: string) => {
+        setMobileMenuOpen(false)
+        
+        if (location.pathname !== "/") {
+            // If we are not on the home page (e.g. Project Detail), navigate to home with hash
+            navigate(`/#${id}`)
+            return
+        }
+
         const element = document.getElementById(id)
         if (element) {
-            const offset = 80
-            const elementPosition = element.getBoundingClientRect().top
-            const offsetPosition = elementPosition + window.pageYOffset - offset
-            window.scrollTo({ top: offsetPosition, behavior: "smooth" })
+            // scrollIntoView works perfectly even if the scrolling container is not window
+            element.scrollIntoView({ behavior: "smooth", block: "start" })
         }
-        setMobileMenuOpen(false)
     }
 
     return (
@@ -67,9 +90,8 @@ export function Header() {
                 }}
                 animate={isVisible ? "visible" : "hidden"}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                    isScrolled ? 'py-4 bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-slate-200 dark:border-white/5 shadow-xl' : 'py-6 bg-white/50 dark:bg-black/50 backdrop-blur-sm'
-                }`}
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4 bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-slate-200 dark:border-white/5 shadow-xl' : 'py-6 bg-white/50 dark:bg-black/50 backdrop-blur-sm'
+                    }`}
             >
                 <div className="container mx-auto px-6 md:px-12">
                     <nav className="flex items-center justify-between">
@@ -80,7 +102,7 @@ export function Header() {
                                 e.preventDefault()
                                 scrollToSection("home")
                             }}
-                            className="font-display text-xl md:text-2xl font-black uppercase tracking-widest text-[#ffb703] drop-shadow-md"
+                            className="font-display flex items-center leading-none text-xl md:text-2xl font-black uppercase tracking-widest text-[#ffb703] drop-shadow-md"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -93,9 +115,8 @@ export function Header() {
                                 <motion.button
                                     key={item.id}
                                     onClick={() => scrollToSection(item.id)}
-                                    className={`relative py-2 text-sm lg:text-base tracking-wide transition-colors duration-300 ${
-                                        activeSection === item.id ? 'text-slate-900 dark:text-white font-medium' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                                    }`}
+                                    className={`relative py-2 text-sm lg:text-base tracking-wide transition-colors duration-300 ${activeSection === item.id ? 'text-slate-900 dark:text-white font-medium' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                                        }`}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
@@ -113,14 +134,13 @@ export function Header() {
 
                         {/* Decorative Toggle Switch */}
                         <div className="hidden md:flex items-center">
-                            <motion.button 
+                            <motion.button
                                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                                className={`w-14 h-7 rounded-full p-1 flex items-center transition-colors duration-300 ${
-                                    theme === 'dark' ? 'bg-white' : 'bg-[#ffb703]'
-                                }`}
+                                className={`w-14 h-7 rounded-full p-1 flex items-center transition-colors duration-300 ${theme === 'dark' ? 'bg-white' : 'bg-[#ffb703]'
+                                    }`}
                                 whileTap={{ scale: 0.9 }}
                             >
-                                <motion.div 
+                                <motion.div
                                     className={`w-5 h-5 rounded-full shadow-md ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
                                     animate={{ x: theme === 'dark' ? 28 : 0 }}
                                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -136,10 +156,10 @@ export function Header() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0 }}
                                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                    className="md:hidden p-2 rounded-full text-[#ffb703]"
+                                    className="md:hidden p-2 -mr-2 rounded-full text-[#ffb703] flex items-center justify-center"
                                     whileTap={{ scale: 0.9 }}
                                 >
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mt-0.5">
                                         {mobileMenuOpen ? (
                                             <path d="M6 18L18 6M6 6l12 12" />
                                         ) : (
@@ -167,9 +187,8 @@ export function Header() {
                                     <motion.button
                                         key={item.id}
                                         onClick={() => scrollToSection(item.id)}
-                                        className={`relative text-lg tracking-wide ${
-                                            activeSection === item.id ? 'text-[#ffb703] font-bold' : 'text-slate-600 dark:text-white'
-                                        }`}
+                                        className={`relative text-lg tracking-wide ${activeSection === item.id ? 'text-[#ffb703] font-bold' : 'text-slate-600 dark:text-white'
+                                            }`}
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         {item.label}
@@ -181,13 +200,12 @@ export function Header() {
                                         )}
                                     </motion.button>
                                 ))}
-                                <motion.button 
+                                <motion.button
                                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                                    className={`mt-4 w-14 h-7 rounded-full p-1 flex items-center ${
-                                        theme === 'dark' ? 'bg-white' : 'bg-[#ffb703]'
-                                    }`}
+                                    className={`mt-4 w-14 h-7 rounded-full p-1 flex items-center ${theme === 'dark' ? 'bg-white' : 'bg-[#ffb703]'
+                                        }`}
                                 >
-                                    <motion.div 
+                                    <motion.div
                                         className={`w-5 h-5 rounded-full ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
                                         animate={{ x: theme === 'dark' ? 28 : 0 }}
                                     />

@@ -1,6 +1,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -20,6 +21,8 @@ const app = isConfigured
   : null;
 
 const db = app ? getFirestore(app) : null;
+const auth = app ? getAuth(app) : null;
+const googleProvider = new GoogleAuthProvider();
 
 let analytics = null;
 if (app && typeof window !== 'undefined') {
@@ -30,4 +33,4 @@ if (app && typeof window !== 'undefined') {
   });
 }
 
-export { app, db, analytics, isConfigured };
+export { app, db, auth, googleProvider, analytics, isConfigured };
