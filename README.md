@@ -33,7 +33,3 @@ Welcome to the source code of my personal developer portfolio! This project is a
 ## 🤝 Contributing
 
 This is a personal portfolio, but feedback and suggestions are always welcome! Feel free to open an issue or submit a pull request if you find any bugs or have ideas for improvements.
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
