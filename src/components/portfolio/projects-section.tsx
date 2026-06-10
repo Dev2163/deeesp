@@ -14,22 +14,26 @@ interface CardProps {
 const Card = ({ project, index, progress, targetScale, range }: CardProps) => {
   const navigate = useNavigate();
   
-  // The scale will start shrinking once the scroll progress passes this card's activation point
   const scale = useTransform(progress, range, [1, targetScale])
   
-  // Fade out slightly as it gets buried deep in the stack
-  const opacity = useTransform(progress, range, [1, 0.4])
+  // As the card shrinks and goes to the background, it should get darker
+  const overlayOpacity = useTransform(progress, range, [0, 0.6])
 
   return (
     <div className="h-screen w-full flex items-center justify-center sticky top-0 pointer-events-none">
       <motion.div 
         style={{ 
             scale, 
-            opacity, 
             top: `calc(10vh + ${index * 20}px)` 
         }}
         className="relative w-[90vw] md:w-full h-[75vh] md:h-[80vh] max-w-6xl mx-auto rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border border-slate-200 dark:border-white/10 origin-top bg-slate-50 dark:bg-zinc-950 pointer-events-auto transition-colors duration-500"
       >
+        {/* Dark Overlay for Depth Effect */}
+        <motion.div 
+            style={{ opacity: overlayOpacity }} 
+            className="absolute inset-0 bg-black pointer-events-none z-[60]"
+        />
+        
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -108,13 +112,12 @@ export function ProjectsSection() {
   })
 
   // State for filtering
-  const [filter, setFilter] = useState("All")
+  const [filter, setFilter] = useState("Web")
   const categories = [
-    { name: "All", count: projects.length },
     { name: "Web", count: projects.filter(p => p.category === "Web").length },
     { name: "Mobile", count: projects.filter(p => p.category === "Mobile").length },
   ]
-  const filteredProjects = filter === "All" ? projects : projects.filter(p => p.category === filter)
+  const filteredProjects = projects.filter(p => p.category === filter)
 
   return (
     <section id="projects" className="relative bg-slate-100 dark:bg-black pt-24 pb-12 w-full transition-colors duration-500">
